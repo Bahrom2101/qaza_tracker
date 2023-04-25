@@ -1,9 +1,6 @@
 {
   "sign_in_google": "Sign in with Google",
   "continue_without_sign_in": "Continue without sign in",
-  "warning_sign_in": "If you do not sign in, your data will not be stored in the server",
-  "main": "Main",
-  "profile": "Profile",
   "error_occurred": "Error occurred",
   "fajr": "Fajr",
   "zuhr": "Zuhr",

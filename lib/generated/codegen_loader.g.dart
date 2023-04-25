@@ -14,12 +14,22 @@ class CodegenLoader extends AssetLoader{
     return Future.value(mapLocales[locale.toString()]);
   }
 
-  static const Map<String,dynamic> en = {
+  static const Map<String,dynamic> ru = {
+  "sign_in_google": "Войти через Google",
+  "continue_without_sign_in": "Продолжить без входа",
+  "error_occurred": "Возникла ошибка",
+  "fajr": "Фаджр",
+  "zuhr": "Зухр",
+  "asr": "Аср",
+  "maghrib": "Магриб",
+  "isha": "Иша",
+  "witr": "Витр",
+  "add_period": "Каза намазы в этот период будет добавлен",
+  "exit": "Выход"
+};
+static const Map<String,dynamic> en = {
   "sign_in_google": "Sign in with Google",
   "continue_without_sign_in": "Continue without sign in",
-  "warning_sign_in": "If you do not sign in, your data will not be stored in the server",
-  "main": "Main",
-  "profile": "Profile",
   "error_occurred": "Error occurred",
   "fajr": "Fajr",
   "zuhr": "Zuhr",
@@ -33,9 +43,6 @@ class CodegenLoader extends AssetLoader{
 static const Map<String,dynamic> uz = {
   "sign_in_google": "Google orqali kirish",
   "continue_without_sign_in": "Ro'yxatdan o'tmasdan kirish",
-  "warning_sign_in": "Ro'yxatdan o'tmasangiz ma'lumotlaringiz serverda saqlanmaydi",
-  "main": "Asosiy",
-  "profile": "Profil",
   "error_occurred": "Xatolik sodir bo'ldi",
   "fajr": "Bomdod",
   "zuhr": "Peshin",
@@ -46,5 +53,5 @@ static const Map<String,dynamic> uz = {
   "add_period": "Shu oraliqdagi qazolar qo'shiladi",
   "exit": "Chiqish"
 };
-static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "uz": uz};
+static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "en": en, "uz": uz};
 }

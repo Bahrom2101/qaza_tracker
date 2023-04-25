@@ -32,7 +32,11 @@ class _LoginPageState extends State<LoginPage> {
     ),
     const DropdownMenuItem(
       value: uz,
-      child: Text('Uzbek'),
+      child: Text("O'zbek"),
+    ),
+    const DropdownMenuItem(
+      value: ru,
+      child: Text('Русский'),
     ),
   ];
 
@@ -139,33 +143,40 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _signInGoogle() async {
-    final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
-    if (gUser != null) {
-      final GoogleSignInAuthentication gAuth = await gUser.authentication;
-      var credential = GoogleAuthProvider.credential(
-        accessToken: gAuth.accessToken,
-        idToken: gAuth.idToken,
-      );
-      var userCredential =
-          await FirebaseAuth.instance.signInWithCredential(credential);
-      var users = FirebaseFirestore.instance.collection(usersCollection);
-      var documentSnapshot =
-          await users.doc(userCredential.user?.email ?? '').get();
-      if (documentSnapshot.data() == null) {
-        users.doc(userCredential.user?.email ?? '').set(UserModel(
-              email: userCredential.user?.email ?? '',
-              fajr: 0,
-              zuhr: 0,
-              asr: 0,
-              maghrib: 0,
-              isha: 0,
-              witr: 0,
-            ).toJson());
+    try {
+      final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
+      if (gUser != null) {
+        final GoogleSignInAuthentication gAuth = await gUser.authentication;
+        var credential = GoogleAuthProvider.credential(
+          accessToken: gAuth.accessToken,
+          idToken: gAuth.idToken,
+        );
+        var userCredential =
+            await FirebaseAuth.instance.signInWithCredential(credential);
+        var users = FirebaseFirestore.instance.collection(usersCollection);
+        var documentSnapshot =
+            await users.doc(userCredential.user?.email ?? '').get();
+        if (documentSnapshot.data() == null) {
+          users.doc(userCredential.user?.email ?? '').set(UserModel(
+                email: userCredential.user?.email ?? '',
+                fajr: 0,
+                zuhr: 0,
+                asr: 0,
+                maghrib: 0,
+                isha: 0,
+                witr: 0,
+              ).toJson());
+        }
+        LocalStorage.setEmail(userCredential.user?.email ?? '');
+        LocalStorage.setSigned(true);
+        bloc.add(const ChangeStatusEvent(FormzSubmissionStatus.success));
+      } else {
+        bloc.add(ChangeStatusEvent(
+          FormzSubmissionStatus.failure,
+          LocaleKeys.error_occurred.tr(),
+        ));
       }
-      LocalStorage.setEmail(userCredential.user?.email ?? '');
-      LocalStorage.setSigned(true);
-      bloc.add(const ChangeStatusEvent(FormzSubmissionStatus.success));
-    } else {
+    } catch (e) {
       bloc.add(ChangeStatusEvent(
         FormzSubmissionStatus.failure,
         LocaleKeys.error_occurred.tr(),

@@ -21,6 +21,7 @@ class AppConsts {
 const appName = 'Qaza tracker - Qazo hisoblash';
 const uz = 'uz';
 const en = 'en';
+const ru = 'ru';
 const dark = 'dark';
 const light = 'light';
 const usersCollection = 'users';

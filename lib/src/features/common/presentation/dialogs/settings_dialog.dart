@@ -18,12 +18,16 @@ class _SettingsDialogState extends State<SettingsDialog> {
 
   List<DropdownMenuItem<String>> items = [
     const DropdownMenuItem(
-      value: uz,
-      child: Text('Uzbek'),
-    ),
-    const DropdownMenuItem(
       value: en,
       child: Text('English'),
+    ),
+    const DropdownMenuItem(
+      value: uz,
+      child: Text("O'zbek"),
+    ),
+    const DropdownMenuItem(
+      value: ru,
+      child: Text('Русский'),
     ),
   ];
 
@@ -49,7 +53,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
                 if (value != _languageCode) {
                   context.setLocale(Locale(value ?? _languageCode));
                   setState(() {
-                    _languageCode = value ?? 'uz';
+                    _languageCode = value ?? 'en';
                   });
                   LocalStorage.setLocale(_languageCode);
                 }

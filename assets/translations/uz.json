@@ -1,9 +1,6 @@
 {
   "sign_in_google": "Google orqali kirish",
   "continue_without_sign_in": "Ro'yxatdan o'tmasdan kirish",
-  "warning_sign_in": "Ro'yxatdan o'tmasangiz ma'lumotlaringiz serverda saqlanmaydi",
-  "main": "Asosiy",
-  "profile": "Profil",
   "error_occurred": "Xatolik sodir bo'ldi",
   "fajr": "Bomdod",
   "zuhr": "Peshin",
