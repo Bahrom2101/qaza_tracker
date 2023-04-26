@@ -16,6 +16,7 @@ class CodegenLoader extends AssetLoader{
 
   static const Map<String,dynamic> ru = {
   "sign_in_google": "Войти через Google",
+  "sign_in_apple": "Войти с Apple ID",
   "continue_without_sign_in": "Продолжить без входа",
   "error_occurred": "Возникла ошибка",
   "fajr": "Фаджр",
@@ -29,6 +30,7 @@ class CodegenLoader extends AssetLoader{
 };
 static const Map<String,dynamic> en = {
   "sign_in_google": "Sign in with Google",
+  "sign_in_apple": "Sign in with Apple ID",
   "continue_without_sign_in": "Continue without sign in",
   "error_occurred": "Error occurred",
   "fajr": "Fajr",
@@ -42,6 +44,7 @@ static const Map<String,dynamic> en = {
 };
 static const Map<String,dynamic> uz = {
   "sign_in_google": "Google orqali kirish",
+  "sign_in_apple": "Apple ID bilan kirish",
   "continue_without_sign_in": "Ro'yxatdan o'tmasdan kirish",
   "error_occurred": "Xatolik sodir bo'ldi",
   "fajr": "Bomdod",

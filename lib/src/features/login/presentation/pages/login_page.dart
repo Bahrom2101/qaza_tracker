@@ -1,4 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypto/crypto.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +18,7 @@ import 'package:qaza_tracker/src/config/themes/app_icons.dart';
 import 'package:qaza_tracker/src/core/local_source/local_storage.dart';
 import 'package:qaza_tracker/src/features/login/presentation/blocs/login_bloc.dart';
 import 'package:qaza_tracker/src/features/main/data/models/user_model.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -116,6 +122,29 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
+                  if (Platform.isIOS) kHeight8,
+                  if (Platform.isIOS)
+                    ElevatedButton(
+                      onPressed: () async {
+                        bloc.add(const ChangeStatusEvent(
+                            FormzSubmissionStatus.inProgress));
+                        signInWithApple();
+                      },
+                      style: ButtonStyle(
+                          minimumSize: MaterialStateProperty.all(
+                              const Size.fromHeight(50))),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.apple),
+                          kWidth16,
+                          Text(
+                            LocaleKeys.sign_in_apple.tr(),
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
                   kHeight8,
                   ElevatedButton(
                     onPressed: () {
@@ -176,6 +205,65 @@ class _LoginPageState extends State<LoginPage> {
           LocaleKeys.error_occurred.tr(),
         ));
       }
+    } catch (e) {
+      bloc.add(ChangeStatusEvent(
+        FormzSubmissionStatus.failure,
+        LocaleKeys.error_occurred.tr(),
+      ));
+    }
+  }
+
+  String generateNonce([int length = 32]) {
+    final charset =
+        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+    final random = Random.secure();
+    return List.generate(length, (_) => charset[random.nextInt(charset.length)])
+        .join();
+  }
+
+  String sha256ofString(String input) {
+    final bytes = utf8.encode(input);
+    final digest = sha256.convert(bytes);
+    return digest.toString();
+  }
+
+  signInWithApple() async {
+    try {
+      final rawNonce = generateNonce();
+      final nonce = sha256ofString(rawNonce);
+
+      final appleCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+        nonce: nonce,
+      );
+
+      final oauthCredential = OAuthProvider("apple.com").credential(
+        idToken: appleCredential.identityToken,
+        rawNonce: rawNonce,
+      );
+
+      var userCredential =
+          await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+      var users = FirebaseFirestore.instance.collection(usersCollection);
+      var documentSnapshot =
+          await users.doc(userCredential.user?.email ?? '').get();
+      if (documentSnapshot.data() == null) {
+        users.doc(userCredential.user?.email ?? '').set(UserModel(
+              email: userCredential.user?.email ?? '',
+              fajr: 0,
+              zuhr: 0,
+              asr: 0,
+              maghrib: 0,
+              isha: 0,
+              witr: 0,
+            ).toJson());
+      }
+      LocalStorage.setEmail(userCredential.user?.email ?? '');
+      LocalStorage.setSigned(true);
+      bloc.add(const ChangeStatusEvent(FormzSubmissionStatus.success));
     } catch (e) {
       bloc.add(ChangeStatusEvent(
         FormzSubmissionStatus.failure,

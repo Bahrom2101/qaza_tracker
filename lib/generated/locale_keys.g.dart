@@ -2,6 +2,7 @@
 
 abstract class  LocaleKeys {
   static const sign_in_google = 'sign_in_google';
+  static const sign_in_apple = 'sign_in_apple';
   static const continue_without_sign_in = 'continue_without_sign_in';
   static const error_occurred = 'error_occurred';
   static const fajr = 'fajr';
