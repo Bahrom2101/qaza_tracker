@@ -13,5 +13,11 @@ abstract class  LocaleKeys {
   static const witr = 'witr';
   static const add_period = 'add_period';
   static const exit = 'exit';
+  static const save = 'save';
+  static const day = 'day';
+  static const month = 'month';
+  static const year = 'year';
+  static const start_date = 'start_date';
+  static const end_date = 'end_date';
 
 }

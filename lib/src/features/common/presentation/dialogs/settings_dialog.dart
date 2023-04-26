@@ -45,19 +45,20 @@ class _SettingsDialogState extends State<SettingsDialog> {
         mainAxisSize: MainAxisSize.min,
         children: [
           DropdownButton(
-              value: _languageCode,
-              items: items,
-              underline: const SizedBox(),
-              icon: const Icon(Icons.language),
-              onChanged: (value) {
-                if (value != _languageCode) {
-                  context.setLocale(Locale(value ?? _languageCode));
-                  setState(() {
-                    _languageCode = value ?? 'en';
-                  });
-                  LocalStorage.setLocale(_languageCode);
-                }
-              }),
+            value: _languageCode,
+            items: items,
+            underline: const SizedBox(),
+            icon: const Icon(Icons.language),
+            onChanged: (value) {
+              if (value != _languageCode) {
+                context.setLocale(Locale(value ?? _languageCode));
+                setState(() {
+                  _languageCode = value ?? 'en';
+                });
+                LocalStorage.setLocale(_languageCode);
+              }
+            },
+          ),
           kHeight16,
           OutlinedButton(
             onPressed: () => Navigator.of(context).pop('exit'),

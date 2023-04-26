@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:qaza_tracker/src/config/constants/constants.dart';
+import 'package:qaza_tracker/src/features/common/presentation/components/text_inputs/app_text_input.dart';
 
 class QazaItem extends StatefulWidget {
   const QazaItem({
@@ -39,11 +40,6 @@ class _QazaItemState extends State<QazaItem> {
     _focus.addListener(() {
       setState(() {
         _focused = _focus.hasFocus;
-        if (_focus.hasFocus) {
-          controller.selection = TextSelection.fromPosition(
-            TextPosition(offset: controller.text.length),
-          );
-        }
       });
     });
   }
@@ -83,46 +79,15 @@ class _QazaItemState extends State<QazaItem> {
               kWidth8,
               SizedBox(
                 width: widget.width - 200,
-                child: TextFormField(
-                  // initialValue: widget.count.toString(),
-                  focusNode: _focus,
-                  controller: controller..text = widget.count.toString(),
-                  maxLines: 1,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'\d'))
-                  ],
-                  style: const TextStyle(fontSize: 18),
-                  textAlign: TextAlign.center,
-                  cursorColor: Colors.blue,
-                  decoration: InputDecoration(
-                    suffixIcon: _focused
-                        ? Transform.scale(
-                            scale: 0.7,
-                            child: IconButton(
-                              style: IconButton.styleFrom(
-                                backgroundColor: Colors.lightBlue.shade200,
-                                shape: const CircleBorder(),
-                              ),
-                              icon: const Icon(Icons.check),
-                              onPressed: () {
-                                widget.onChange(int.parse(controller.text));
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
-                              },
-                            ),
-                          )
-                        : null,
-                    contentPadding: const EdgeInsets.all(10),
-                    focusColor: Colors.blue,
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(kBorderRadius),
-                      borderSide: const BorderSide(color: Colors.blue),
-                    ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(kBorderRadius)),
-                  ),
-                ),
+                child: AppTextInput(
+                    focus: _focus,
+                    controller: controller..text = widget.count.toString(),
+                    focused: _focused,
+                    onTapSuffix: () {
+                      widget.onChange(int.parse(controller.text));
+                      FocusScope.of(context).requestFocus(FocusNode());
+                    },
+                    borderRadius: kBorderRadius),
               ),
               kWidth8,
               OutlinedButton(

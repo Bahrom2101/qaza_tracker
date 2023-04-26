@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:qaza_tracker/generated/locale_keys.g.dart';
 import 'package:qaza_tracker/src/config/constants/constants.dart';
 import 'package:qaza_tracker/src/config/routes/app_routes.dart';
 import 'package:qaza_tracker/src/core/local_source/local_storage.dart';
@@ -31,6 +30,9 @@ class _MainPageState extends State<MainPage>
     super.initState();
   }
 
+  DateTime? startDate;
+  DateTime? endDate;
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -45,26 +47,12 @@ class _MainPageState extends State<MainPage>
               actions: [
                 IconButton(
                   onPressed: () async {
-                    final res = await showDateRangePicker(
-                        context: context,
-                        helpText: LocaleKeys.add_period.tr(),
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime.now(),
-                        initialEntryMode: DatePickerEntryMode.calendar,
-                        builder: (_, child) {
-                          return Theme(
-                            data: ThemeData.light().copyWith(
-                              colorScheme: ColorScheme.light(
-                                primary: Theme.of(context).primaryColorDark,
-                                onPrimary: Colors.white, // header text color
-                              ),
-                            ),
-                            child: child!,
-                          );
-                        });
-                    if (res != null) {
-                      bloc.add(AddPeriodEvent(
-                          res.start.difference(res.end).inDays.abs() + 1));
+                    final res = await Navigator.pushNamed(
+                      context,
+                      AppRoutes.dateRange,
+                    );
+                    if (res is int) {
+                      bloc.add(AddPeriodEvent(res + 1));
                     }
                   },
                   icon: const Icon(Icons.calendar_month),

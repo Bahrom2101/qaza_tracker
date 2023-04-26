@@ -9,6 +9,12 @@
   "maghrib": "Maghrib",
   "isha": "Isha",
   "witr": "Witr",
-  "add_period": "Qadaas in this period, will be added",
-  "exit": "Exit"
+  "add_period": "Prayers in this period, will be added",
+  "exit": "Exit",
+  "save": "Save",
+  "day": "day",
+  "month": "month",
+  "year": "year",
+  "start_date": "Start date",
+  "end_date": "End date"
 }

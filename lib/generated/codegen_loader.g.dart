@@ -26,7 +26,13 @@ class CodegenLoader extends AssetLoader{
   "isha": "Иша",
   "witr": "Витр",
   "add_period": "Каза намазы в этот период будет добавлен",
-  "exit": "Выход"
+  "exit": "Выход",
+  "save": "Сохранять",
+  "day": "день",
+  "month": "месяц",
+  "year": "год",
+  "start_date": "Дата начала",
+  "end_date": "Дата окончания"
 };
 static const Map<String,dynamic> en = {
   "sign_in_google": "Sign in with Google",
@@ -39,8 +45,14 @@ static const Map<String,dynamic> en = {
   "maghrib": "Maghrib",
   "isha": "Isha",
   "witr": "Witr",
-  "add_period": "Qadaas in this period, will be added",
-  "exit": "Exit"
+  "add_period": "Prayers in this period, will be added",
+  "exit": "Exit",
+  "save": "Save",
+  "day": "day",
+  "month": "month",
+  "year": "year",
+  "start_date": "Start date",
+  "end_date": "End date"
 };
 static const Map<String,dynamic> uz = {
   "sign_in_google": "Google orqali kirish",
@@ -54,7 +66,13 @@ static const Map<String,dynamic> uz = {
   "isha": "Xufton",
   "witr": "Vitr",
   "add_period": "Shu oraliqdagi qazolar qo'shiladi",
-  "exit": "Chiqish"
+  "exit": "Chiqish",
+  "save": "Saqlash",
+  "day": "kun",
+  "month": "oy",
+  "year": "yil",
+  "start_date": "Boshlanish sanasi",
+  "end_date": "Tugash sanasi"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "en": en, "uz": uz};
 }

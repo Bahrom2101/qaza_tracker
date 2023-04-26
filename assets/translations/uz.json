@@ -10,5 +10,11 @@
   "isha": "Xufton",
   "witr": "Vitr",
   "add_period": "Shu oraliqdagi qazolar qo'shiladi",
-  "exit": "Chiqish"
+  "exit": "Chiqish",
+  "save": "Saqlash",
+  "day": "kun",
+  "month": "oy",
+  "year": "yil",
+  "start_date": "Boshlanish sanasi",
+  "end_date": "Tugash sanasi"
 }
