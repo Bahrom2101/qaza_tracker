@@ -1,24 +1,16 @@
-import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:crypto/crypto.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:formz/formz.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:qaza_tracker/generated/locale_keys.g.dart';
 import 'package:qaza_tracker/src/config/constants/constants.dart';
 import 'package:qaza_tracker/src/config/routes/app_routes.dart';
 import 'package:qaza_tracker/src/config/themes/app_icons.dart';
 import 'package:qaza_tracker/src/core/local_source/local_storage.dart';
 import 'package:qaza_tracker/src/features/login/presentation/blocs/login_bloc.dart';
-import 'package:qaza_tracker/src/features/main/data/models/user_model.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -32,17 +24,35 @@ class _LoginPageState extends State<LoginPage> {
   late LoginBloc bloc;
 
   List<DropdownMenuItem<String>> items = [
-    const DropdownMenuItem(
+    DropdownMenuItem(
       value: en,
-      child: Text('English'),
+      child: Row(
+        children: [
+          SvgPicture.asset(AppIcons.en),
+          kWidth8,
+          const Text('English'),
+        ],
+      ),
     ),
-    const DropdownMenuItem(
+    DropdownMenuItem(
       value: uz,
-      child: Text("O'zbek"),
+      child: Row(
+        children: [
+          SvgPicture.asset(AppIcons.uz),
+          kWidth8,
+          const Text("O'zbek"),
+        ],
+      ),
     ),
-    const DropdownMenuItem(
+    DropdownMenuItem(
       value: ru,
-      child: Text('Русский'),
+      child: Row(
+        children: [
+          SvgPicture.asset(AppIcons.ru),
+          kWidth8,
+          const Text('Русский'),
+        ],
+      ),
     ),
   ];
 
@@ -72,203 +82,109 @@ class _LoginPageState extends State<LoginPage> {
         },
         builder: (context, state) {
           return Scaffold(
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 48),
-                    child: DropdownButton(
-                      value: _languageCode,
-                      items: items,
-                      elevation: 4,
-                      underline: const SizedBox(),
-                      icon: const Icon(Icons.language),
-                      onChanged: (value) {
-                        if (value != _languageCode) {
-                          context.setLocale(Locale(value ?? _languageCode));
-                          setState(() {
-                            _languageCode = value ?? 'en';
-                          });
-                          LocalStorage.setLocale(_languageCode);
-                        }
-                      },
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      bloc.add(const ChangeStatusEvent(
-                          FormzSubmissionStatus.inProgress));
-                      _signInGoogle();
-                    },
-                    style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(
-                            const Size.fromHeight(50))),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          AppIcons.google,
-                          width: 24,
-                          height: 24,
+            body: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 48),
+                        child: DropdownButton(
+                          value: _languageCode,
+                          items: items,
+                          elevation: 4,
+                          underline: const SizedBox(),
+                          onChanged: (value) {
+                            if (value != _languageCode) {
+                              context.setLocale(Locale(value ?? _languageCode));
+                              setState(() {
+                                _languageCode = value ?? 'en';
+                              });
+                              LocalStorage.setLocale(_languageCode);
+                            }
+                          },
                         ),
-                        kWidth16,
-                        Text(
-                          LocaleKeys.sign_in_google.tr(),
-                          style: const TextStyle(fontSize: 16),
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          bloc.add(const GoogleSignInEvent());
+                        },
+                        style: ButtonStyle(
+                            minimumSize: MaterialStateProperty.all(
+                                const Size.fromHeight(50))),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              AppIcons.google,
+                              width: 24,
+                              height: 24,
+                            ),
+                            kWidth16,
+                            Text(
+                              LocaleKeys.sign_in_google.tr(),
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                      ),
+                      if (Platform.isIOS) ...[
+                        kHeight8,
+                        ElevatedButton(
+                          onPressed: () async {
+                            bloc.add(const AppleSignInEvent());
+                          },
+                          style: ButtonStyle(
+                              minimumSize: MaterialStateProperty.all(
+                                  const Size.fromHeight(50))),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.apple),
+                              kWidth16,
+                              Text(
+                                LocaleKeys.sign_in_apple.tr(),
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
-                    ),
-                  ),
-                  if (Platform.isIOS) kHeight8,
-                  if (Platform.isIOS)
-                    ElevatedButton(
-                      onPressed: () async {
-                        bloc.add(const ChangeStatusEvent(
-                            FormzSubmissionStatus.inProgress));
-                        signInWithApple();
-                      },
-                      style: ButtonStyle(
-                          minimumSize: MaterialStateProperty.all(
-                              const Size.fromHeight(50))),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(Icons.apple),
-                          kWidth16,
-                          Text(
-                            LocaleKeys.sign_in_apple.tr(),
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                        ],
+                      kHeight8,
+                      ElevatedButton(
+                        onPressed: () {
+                          LocalStorage.setSigned(true);
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                            AppRoutes.main,
+                            (route) => false,
+                          );
+                        },
+                        style: ButtonStyle(
+                            minimumSize: MaterialStateProperty.all(
+                                const Size.fromHeight(50))),
+                        child: Text(
+                          LocaleKeys.continue_without_sign_in.tr(),
+                          style: const TextStyle(fontSize: 16),
+                        ),
                       ),
-                    ),
-                  kHeight8,
-                  ElevatedButton(
-                    onPressed: () {
-                      LocalStorage.setSigned(true);
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        AppRoutes.main,
-                        (route) => false,
-                      );
-                    },
-                    style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(
-                            const Size.fromHeight(50))),
-                    child: Text(
-                      LocaleKeys.continue_without_sign_in.tr(),
-                      style: const TextStyle(fontSize: 16),
-                    ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                if(state.statusLogin.isInProgress)
+                Container(
+                  color: Colors.black38,
+                  child: const Center(
+                    child: CircularProgressIndicator(color: Colors.white),
+                  ),
+                ),
+              ],
             ),
           );
         },
       ),
     );
-  }
-
-  void _signInGoogle() async {
-    try {
-      final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
-      if (gUser != null) {
-        final GoogleSignInAuthentication gAuth = await gUser.authentication;
-        var credential = GoogleAuthProvider.credential(
-          accessToken: gAuth.accessToken,
-          idToken: gAuth.idToken,
-        );
-        var userCredential =
-            await FirebaseAuth.instance.signInWithCredential(credential);
-        var users = FirebaseFirestore.instance.collection(usersCollection);
-        var documentSnapshot =
-            await users.doc(userCredential.user?.email ?? '').get();
-        if (documentSnapshot.data() == null) {
-          users.doc(userCredential.user?.email ?? '').set(UserModel(
-                email: userCredential.user?.email ?? '',
-                fajr: 0,
-                zuhr: 0,
-                asr: 0,
-                maghrib: 0,
-                isha: 0,
-                witr: 0,
-              ).toJson());
-        }
-        LocalStorage.setEmail(userCredential.user?.email ?? '');
-        LocalStorage.setSigned(true);
-        bloc.add(const ChangeStatusEvent(FormzSubmissionStatus.success));
-      } else {
-        bloc.add(ChangeStatusEvent(
-          FormzSubmissionStatus.failure,
-          LocaleKeys.error_occurred.tr(),
-        ));
-      }
-    } catch (e) {
-      bloc.add(ChangeStatusEvent(
-        FormzSubmissionStatus.failure,
-        LocaleKeys.error_occurred.tr(),
-      ));
-    }
-  }
-
-  String generateNonce([int length = 32]) {
-    final charset =
-        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
-    final random = Random.secure();
-    return List.generate(length, (_) => charset[random.nextInt(charset.length)])
-        .join();
-  }
-
-  String sha256ofString(String input) {
-    final bytes = utf8.encode(input);
-    final digest = sha256.convert(bytes);
-    return digest.toString();
-  }
-
-  signInWithApple() async {
-    try {
-      final rawNonce = generateNonce();
-      final nonce = sha256ofString(rawNonce);
-
-      final appleCredential = await SignInWithApple.getAppleIDCredential(
-        scopes: [
-          AppleIDAuthorizationScopes.email,
-          AppleIDAuthorizationScopes.fullName,
-        ],
-        nonce: nonce,
-      );
-
-      final oauthCredential = OAuthProvider("apple.com").credential(
-        idToken: appleCredential.identityToken,
-        rawNonce: rawNonce,
-      );
-
-      var userCredential =
-          await FirebaseAuth.instance.signInWithCredential(oauthCredential);
-      var users = FirebaseFirestore.instance.collection(usersCollection);
-      var documentSnapshot =
-          await users.doc(userCredential.user?.email ?? '').get();
-      if (documentSnapshot.data() == null) {
-        users.doc(userCredential.user?.email ?? '').set(UserModel(
-              email: userCredential.user?.email ?? '',
-              fajr: 0,
-              zuhr: 0,
-              asr: 0,
-              maghrib: 0,
-              isha: 0,
-              witr: 0,
-            ).toJson());
-      }
-      LocalStorage.setEmail(userCredential.user?.email ?? '');
-      LocalStorage.setSigned(true);
-      bloc.add(const ChangeStatusEvent(FormzSubmissionStatus.success));
-    } catch (e) {
-      bloc.add(ChangeStatusEvent(
-        FormzSubmissionStatus.failure,
-        LocaleKeys.error_occurred.tr(),
-      ));
-    }
   }
 }

@@ -46,6 +46,10 @@ class _MainPageState extends State<MainPage>
               elevation: 2,
               actions: [
                 IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.lock),
+                ),
+                IconButton(
                   onPressed: () async {
                     final res = await Navigator.pushNamed(
                       context,
