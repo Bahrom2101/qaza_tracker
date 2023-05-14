@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:qaza_tracker/src/config/constants/constants.dart';
 import 'package:qaza_tracker/src/features/common/presentation/components/text_inputs/app_text_input.dart';
 
@@ -13,6 +12,7 @@ class QazaItem extends StatefulWidget {
     required this.name,
     required this.count,
     required this.onChange,
+    required this.locked,
   }) : super(key: key);
 
   final VoidCallback onTapPlus;
@@ -21,6 +21,7 @@ class QazaItem extends StatefulWidget {
   final String name;
   final int count;
   final Function(int) onChange;
+  final bool locked;
 
   @override
   State<QazaItem> createState() => _QazaItemState();
@@ -30,13 +31,10 @@ class _QazaItemState extends State<QazaItem> {
   final controller = TextEditingController();
   final FocusNode _focus = FocusNode();
   bool _focused = false;
-  bool isDarkMode = false;
 
   @override
   void initState() {
     super.initState();
-    var brightness = SchedulerBinding.instance.window.platformBrightness;
-    isDarkMode = brightness == Brightness.dark;
     _focus.addListener(() {
       setState(() {
         _focused = _focus.hasFocus;
@@ -61,12 +59,10 @@ class _QazaItemState extends State<QazaItem> {
           ),
           kHeight8,
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
               OutlinedButton(
-                onPressed: widget.onTapMinus,
+                onPressed: widget.locked ? null : widget.onTapMinus,
                 style: OutlinedButton.styleFrom(
                   shape: const CircleBorder(),
                   minimumSize: const Size(45, 45),
@@ -77,9 +73,9 @@ class _QazaItemState extends State<QazaItem> {
                 ),
               ),
               kWidth8,
-              SizedBox(
-                width: widget.width - 200,
+              Expanded(
                 child: AppTextInput(
+                    readOnly: widget.locked,
                     focus: _focus,
                     controller: controller..text = widget.count.toString(),
                     focused: _focused,
@@ -91,7 +87,7 @@ class _QazaItemState extends State<QazaItem> {
               ),
               kWidth8,
               OutlinedButton(
-                onPressed: widget.onTapPlus,
+                onPressed: widget.locked ? null : widget.onTapPlus,
                 style: OutlinedButton.styleFrom(
                   shape: const CircleBorder(),
                   minimumSize: const Size(45, 45),

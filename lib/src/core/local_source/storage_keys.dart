@@ -10,4 +10,6 @@ class StorageKeys {
   static const maghrib = "maghrib";
   static const isha = "isha";
   static const witr = "witr";
+  static const themeMode = "theme_mode";
+  static const image = "image";
 }

@@ -1,14 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:qaza_tracker/src/config/constants/constants.dart';
 import 'package:qaza_tracker/src/config/routes/app_routes.dart';
-import 'package:qaza_tracker/src/core/local_source/local_storage.dart';
-import 'package:qaza_tracker/src/features/common/presentation/dialogs/settings_dialog.dart';
 import 'package:qaza_tracker/src/features/main/domain/entities/user_entity.dart';
 import 'package:qaza_tracker/src/features/main/presentation/blocs/main_bloc.dart';
+import 'package:qaza_tracker/src/features/main/presentation/widgets/app_drawer.dart';
 import 'package:qaza_tracker/src/features/main/presentation/widgets/qaza_item.dart';
 
 class MainPage extends StatefulWidget {
@@ -23,6 +20,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage>
     with AutomaticKeepAliveClientMixin {
   late MainBloc bloc;
+  bool locked = true;
 
   @override
   void initState() {
@@ -46,8 +44,12 @@ class _MainPageState extends State<MainPage>
               elevation: 2,
               actions: [
                 IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.lock),
+                  onPressed: () {
+                    setState(() {
+                      locked = !locked;
+                    });
+                  },
+                  icon: Icon(locked ? Icons.lock : Icons.lock_open_outlined),
                 ),
                 IconButton(
                   onPressed: () async {
@@ -61,33 +63,15 @@ class _MainPageState extends State<MainPage>
                   },
                   icon: const Icon(Icons.calendar_month),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.settings),
-                  onPressed: () async {
-                    var prev = context.locale.languageCode;
-                    showDialog<String>(
-                      context: context,
-                      builder: (context) => SettingsDialog(
-                        language: prev,
-                      ),
-                    ).then((value) async {
-                      if (value == 'exit') {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, AppRoutes.login, (route) => false);
-                        await FirebaseAuth.instance.signOut();
-                        GoogleSignIn().signOut();
-                        await LocalStorage.clearProfile();
-                      }
-                    });
-                  },
-                )
               ],
             ),
+            drawer: const AppDrawer(),
             body: ListView.separated(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
               itemBuilder: (_, index) {
                 var salahCount = getSalahCount(index, state.user);
                 return QazaItem(
+                  locked: locked,
                   onTapPlus: () =>
                       bloc.add(ChangeValueEvent(index, salahCount + 1)),
                   onTapMinus: () =>

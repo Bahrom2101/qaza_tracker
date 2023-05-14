@@ -13,6 +13,7 @@ class AppTextInput extends StatelessWidget {
     this.text,
     this.maxLength,
     this.onChanged,
+    this.readOnly = false,
   }) : super(key: key);
 
   final FocusNode? focus;
@@ -24,11 +25,13 @@ class AppTextInput extends StatelessWidget {
   final String? text;
   final int? maxLength;
   final Function(String)? onChanged;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      focusNode: focus,
+      readOnly: readOnly,
+      focusNode: readOnly ? null : focus,
       controller: controller ?? TextEditingController(text: text),
       maxLines: 1,
       onChanged: onChanged,

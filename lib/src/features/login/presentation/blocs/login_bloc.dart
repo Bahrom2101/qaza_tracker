@@ -60,6 +60,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
               ).toJson());
         }
         LocalStorage.setEmail(userCredential.user?.email ?? '');
+        LocalStorage.setImage(userCredential.user?.photoURL ?? '');
         LocalStorage.setSigned(true);
         add(const ChangeStatusEvent(FormzSubmissionStatus.success));
       } else {
@@ -112,6 +113,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             ).toJson());
       }
       LocalStorage.setEmail(userCredential.user?.email ?? '');
+      LocalStorage.setImage(userCredential.user?.photoURL ?? '');
       LocalStorage.setSigned(true);
       add(const ChangeStatusEvent(FormzSubmissionStatus.success));
     } catch (e) {
@@ -123,7 +125,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   String generateNonce([int length = 32]) {
-    final charset =
+    const charset =
         '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
     final random = Random.secure();
     return List.generate(length, (_) => charset[random.nextInt(charset.length)])

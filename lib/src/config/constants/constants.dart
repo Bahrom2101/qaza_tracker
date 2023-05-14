@@ -24,6 +24,7 @@ const en = 'en';
 const ru = 'ru';
 const dark = 'dark';
 const light = 'light';
+const system = 'system';
 const usersCollection = 'users';
 
 const kBorderRadius = 30.0;

@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                             if (value != _languageCode) {
                               context.setLocale(Locale(value ?? _languageCode));
                               setState(() {
-                                _languageCode = value ?? 'en';
+                                _languageCode = value ?? en;
                               });
                               LocalStorage.setLocale(_languageCode);
                             }

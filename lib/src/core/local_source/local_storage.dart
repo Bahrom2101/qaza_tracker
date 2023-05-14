@@ -1,3 +1,4 @@
+import 'package:qaza_tracker/src/config/constants/constants.dart';
 import 'package:qaza_tracker/src/core/local_source/storage_keys.dart';
 import 'package:qaza_tracker/src/features/main/data/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -55,6 +56,14 @@ class LocalStorage {
     await _localStorage?.setInt(StorageKeys.witr, value);
   }
 
+  static Future<void> setThemeMode(String value) async {
+    await _localStorage?.setString(StorageKeys.themeMode, value);
+  }
+
+  static Future<void> setImage(String value) async {
+    await _localStorage?.setString(StorageKeys.image, value);
+  }
+
   static Future<void> setUser(UserModel user) async {
     await _localStorage?.setString(StorageKeys.email, user.email);
     await _localStorage?.setInt(StorageKeys.fajr, user.fajr);
@@ -65,8 +74,8 @@ class LocalStorage {
     await _localStorage?.setInt(StorageKeys.witr, user.witr);
   }
 
-  static String get getLocale =>
-      _localStorage?.getString(StorageKeys.locale) ?? 'en';
+  static String get locale =>
+      _localStorage?.getString(StorageKeys.locale) ?? en;
 
   static bool get signed => _localStorage?.getBool(StorageKeys.signed) ?? false;
 
@@ -84,6 +93,11 @@ class LocalStorage {
 
   static int get witr => _localStorage?.getInt(StorageKeys.witr) ?? 0;
 
+  static String get themeMode =>
+      _localStorage?.getString(StorageKeys.themeMode) ?? system;
+
+  static String get image => _localStorage?.getString(StorageKeys.image) ?? '';
+
   static UserModel get user => UserModel(
         email: email,
         fajr: fajr,
@@ -96,6 +110,7 @@ class LocalStorage {
 
   static Future<void> clearProfile() async {
     await setUser(const UserModel());
+    await setImage('');
     await setSigned(false);
   }
 }

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qaza_tracker/src/config/constants/constants.dart';
 
 class AppTheme {
   AppTheme._();
@@ -12,65 +10,25 @@ class AppTheme {
     useMaterial3: true,
     brightness: Brightness.light,
     scaffoldBackgroundColor: ThemeData.light().scaffoldBackgroundColor,
-    cupertinoOverrideTheme:
-        const CupertinoThemeData(brightness: Brightness.light),
-    pageTransitionsTheme: pageTransitionsTheme,
     colorScheme: const ColorScheme.light(),
-    textSelectionTheme: const TextSelectionThemeData(
-      selectionHandleColor: Colors.blue,
-      selectionColor: Colors.blue,
-      cursorColor: Colors.blue,
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.brown.shade700,
+      foregroundColor: Colors.white,
     ),
-    inputDecorationTheme: InputDecorationTheme(
-      contentPadding: const EdgeInsets.all(10),
-      focusColor: Colors.blue,
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(kBorderRadius),
-        borderSide: const BorderSide(color: Colors.blue),
-      ),
-      border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(kBorderRadius)),
-    ),
-    outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-      shape: const CircleBorder(),
-      minimumSize: const Size(45, 45),
-    )),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-            minimumSize: MaterialStateProperty.all(const Size.fromHeight(50)))),
   );
 
   static final ThemeData dark = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
     scaffoldBackgroundColor: ThemeData.dark().scaffoldBackgroundColor,
-    cupertinoOverrideTheme:
-    const CupertinoThemeData(brightness: Brightness.light),
-    pageTransitionsTheme: pageTransitionsTheme,
     colorScheme: const ColorScheme.dark(),
-    textSelectionTheme: const TextSelectionThemeData(
-      selectionHandleColor: Colors.blue,
-      selectionColor: Colors.blue,
-      cursorColor: Colors.blue,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.black54,
+      foregroundColor: Colors.white,
     ),
-    inputDecorationTheme: InputDecorationTheme(
-      contentPadding: const EdgeInsets.all(10),
-      focusColor: Colors.blue,
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(kBorderRadius),
-        borderSide: const BorderSide(color: Colors.blue),
-      ),
-      border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(kBorderRadius)),
-    ),
-    outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          shape: const CircleBorder(),
-          minimumSize: const Size(45, 45),
-        )),
     elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-            minimumSize: MaterialStateProperty.all(const Size.fromHeight(50)))),
+        style: ElevatedButton.styleFrom(
+      foregroundColor: Colors.white,
+    )),
   );
 }
