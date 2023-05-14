@@ -78,8 +78,11 @@ class CustomDateRangeState extends State<CustomDateRange> {
               LocaleKeys.save.tr(),
               style: TextStyle(
                 color: isEnable
-                    ? Theme.of(context).primaryColor
-                    : Theme.of(context).primaryColor.withOpacity(0.5),
+                    ? Theme.of(context).appBarTheme.foregroundColor
+                    : Theme.of(context)
+                        .appBarTheme
+                        .foregroundColor
+                        ?.withOpacity(0.5),
               ),
             ),
           ),

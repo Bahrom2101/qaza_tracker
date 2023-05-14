@@ -15,6 +15,10 @@ class AppTheme {
       backgroundColor: Colors.brown.shade700,
       foregroundColor: Colors.white,
     ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: Colors.black,
+        )),
   );
 
   static final ThemeData dark = ThemeData(
@@ -28,6 +32,10 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
+      foregroundColor: Colors.white,
+    )),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
       foregroundColor: Colors.white,
     )),
   );

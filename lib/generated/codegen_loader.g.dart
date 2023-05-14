@@ -32,7 +32,8 @@ class CodegenLoader extends AssetLoader{
   "month": "месяц",
   "year": "год",
   "start_date": "Дата начала",
-  "end_date": "Дата окончания"
+  "end_date": "Дата окончания",
+  "not_signed_in": "Не авторизован"
 };
 static const Map<String,dynamic> en = {
   "sign_in_google": "Sign in with Google",
@@ -52,7 +53,8 @@ static const Map<String,dynamic> en = {
   "month": "month",
   "year": "year",
   "start_date": "Start date",
-  "end_date": "End date"
+  "end_date": "End date",
+  "not_signed_in": "Not signed in"
 };
 static const Map<String,dynamic> uz = {
   "sign_in_google": "Google orqali kirish",
@@ -72,7 +74,8 @@ static const Map<String,dynamic> uz = {
   "month": "oy",
   "year": "yil",
   "start_date": "Boshlanish sanasi",
-  "end_date": "Tugash sanasi"
+  "end_date": "Tugash sanasi",
+  "not_signed_in": "Profilega kirilmagan"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "en": en, "uz": uz};
 }

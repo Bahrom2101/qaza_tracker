@@ -67,10 +67,7 @@ class _QazaItemState extends State<QazaItem> {
                   shape: const CircleBorder(),
                   minimumSize: const Size(45, 45),
                 ),
-                child: Icon(
-                  Icons.remove,
-                  color: Colors.black.withOpacity(0.65),
-                ),
+                child: const Icon(Icons.remove),
               ),
               kWidth8,
               Expanded(
@@ -92,10 +89,7 @@ class _QazaItemState extends State<QazaItem> {
                   shape: const CircleBorder(),
                   minimumSize: const Size(45, 45),
                 ),
-                child: Icon(
-                  Icons.add,
-                  color: Colors.black.withOpacity(0.65),
-                ),
+                child: const Icon(Icons.add),
               ),
             ],
           ),

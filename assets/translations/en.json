@@ -16,5 +16,6 @@
   "month": "month",
   "year": "year",
   "start_date": "Start date",
-  "end_date": "End date"
+  "end_date": "End date",
+  "not_signed_in": "Not signed in"
 }

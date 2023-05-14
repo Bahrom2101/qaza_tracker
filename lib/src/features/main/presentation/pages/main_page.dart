@@ -44,22 +44,21 @@ class _MainPageState extends State<MainPage>
               elevation: 2,
               actions: [
                 IconButton(
-                  onPressed: () {
-                    setState(() {
-                      locked = !locked;
-                    });
-                  },
+                  onPressed: () => setState(() {
+                    locked = !locked;
+                  }),
                   icon: Icon(locked ? Icons.lock : Icons.lock_open_outlined),
                 ),
                 IconButton(
                   onPressed: () async {
-                    final res = await Navigator.pushNamed(
+                    Navigator.pushNamed(
                       context,
                       AppRoutes.dateRange,
-                    );
-                    if (res is int) {
-                      bloc.add(AddPeriodEvent(res + 1));
-                    }
+                    ).then((value) {
+                      if (value is int) {
+                        bloc.add(AddPeriodEvent(value + 1));
+                      }
+                    });
                   },
                   icon: const Icon(Icons.calendar_month),
                 ),

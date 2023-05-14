@@ -110,7 +110,9 @@ class _AppDrawerState extends State<AppDrawer> {
             ),
             kHeight8,
             Text(
-              LocalStorage.email.isEmpty ? 'Not signed' : LocalStorage.email,
+              LocalStorage.email.isEmpty
+                  ? LocaleKeys.not_signed_in.tr()
+                  : LocalStorage.email,
               style: const TextStyle(color: Colors.white),
             ),
             kHeight8,

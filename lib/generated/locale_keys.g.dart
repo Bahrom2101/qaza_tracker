@@ -19,5 +19,6 @@ abstract class  LocaleKeys {
   static const year = 'year';
   static const start_date = 'start_date';
   static const end_date = 'end_date';
+  static const not_signed_in = 'not_signed_in';
 
 }

@@ -16,5 +16,6 @@
   "month": "oy",
   "year": "yil",
   "start_date": "Boshlanish sanasi",
-  "end_date": "Tugash sanasi"
+  "end_date": "Tugash sanasi",
+  "not_signed_in": "Profilega kirilmagan"
 }
