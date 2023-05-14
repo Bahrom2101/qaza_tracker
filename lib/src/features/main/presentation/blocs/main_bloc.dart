@@ -19,6 +19,7 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     on<ChangeStatusEvent>(_onChangeStatus);
     on<ChangeValueEvent>(_onChangeValue);
     on<AddPeriodEvent>(_onAddPeriod);
+    on<UpdateEvent>(_onUpdate);
   }
 
   _init(InitialEvent event, Emitter<MainState> emit) async {
@@ -80,5 +81,9 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     }
     LocalStorage.setUser(userEntity);
     emit(state.copWith(user: userEntity));
+  }
+
+  _onUpdate(UpdateEvent event, Emitter<MainState> emit) {
+    emit(state.copWith(forUpdate: state.forUpdate + 1));
   }
 }

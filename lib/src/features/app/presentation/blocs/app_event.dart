@@ -9,3 +9,7 @@ class ChangeThemeModeEvent extends AppEvent {
 
   const ChangeThemeModeEvent(this.mode);
 }
+
+class ChangeLangEvent extends AppEvent {
+  const ChangeLangEvent();
+}

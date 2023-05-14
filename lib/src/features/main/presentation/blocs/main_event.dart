@@ -25,3 +25,7 @@ class AddPeriodEvent extends MainEvent {
 
   const AddPeriodEvent(this.days);
 }
+
+class UpdateEvent extends MainEvent {
+  const UpdateEvent();
+}

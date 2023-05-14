@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:formz/formz.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:qaza_tracker/generated/locale_keys.g.dart';
 import 'package:qaza_tracker/src/config/constants/constants.dart';
@@ -10,6 +11,7 @@ import 'package:qaza_tracker/src/config/routes/app_routes.dart';
 import 'package:qaza_tracker/src/config/themes/app_icons.dart';
 import 'package:qaza_tracker/src/core/local_source/local_storage.dart';
 import 'package:qaza_tracker/src/features/app/presentation/blocs/app_bloc.dart';
+import 'package:qaza_tracker/src/features/main/presentation/blocs/main_bloc.dart';
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({
@@ -21,7 +23,7 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-  String _languageCode = uz;
+  String _languageCode = LocalStorage.locale;
   String themMode = LocalStorage.themeMode;
 
   @override
@@ -44,6 +46,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   setState(() {
                     _languageCode = value ?? en;
                   });
+                  context.read<MainBloc>().add(const UpdateEvent());
                   LocalStorage.setLocale(_languageCode);
                 }
               },
@@ -180,35 +183,35 @@ class _AppDrawerState extends State<AppDrawer> {
   ];
 
   List<DropdownMenuItem<String>> get itemsThemeMode => [
-    DropdownMenuItem(
-      value: light,
-      child: Row(
-        children: [
-          const Icon(Icons.light_mode_outlined),
-          kWidth8,
-          Text(LocaleKeys.light.tr()),
-        ],
-      ),
-    ),
-    DropdownMenuItem(
-      value: dark,
-      child: Row(
-        children: [
-          const Icon(Icons.dark_mode),
-          kWidth8,
-          Text(LocaleKeys.dark.tr()),
-        ],
-      ),
-    ),
-    DropdownMenuItem(
-      value: system,
-      child: Row(
-        children: [
-          const Icon(Icons.dark_mode_outlined),
-          kWidth8,
-          Text(LocaleKeys.system.tr()),
-        ],
-      ),
-    ),
-  ];
+        DropdownMenuItem(
+          value: light,
+          child: Row(
+            children: [
+              const Icon(Icons.light_mode_outlined),
+              kWidth8,
+              Text(LocaleKeys.light.tr()),
+            ],
+          ),
+        ),
+        DropdownMenuItem(
+          value: dark,
+          child: Row(
+            children: [
+              const Icon(Icons.dark_mode),
+              kWidth8,
+              Text(LocaleKeys.dark.tr()),
+            ],
+          ),
+        ),
+        DropdownMenuItem(
+          value: system,
+          child: Row(
+            children: [
+              const Icon(Icons.dark_mode_outlined),
+              kWidth8,
+              Text(LocaleKeys.system.tr()),
+            ],
+          ),
+        ),
+      ];
 }
