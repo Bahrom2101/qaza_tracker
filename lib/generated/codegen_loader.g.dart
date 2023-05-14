@@ -33,7 +33,13 @@ class CodegenLoader extends AssetLoader{
   "year": "год",
   "start_date": "Дата начала",
   "end_date": "Дата окончания",
-  "not_signed_in": "Не авторизован"
+  "not_signed_in": "Не авторизован",
+  "light": "Светлый",
+  "dark": "Темный",
+  "system": "Системный",
+  "support": "Поддерживать",
+  "up_comings": "Предстоящие",
+  "feature_process": "Функция находится в процессе разработки"
 };
 static const Map<String,dynamic> en = {
   "sign_in_google": "Sign in with Google",
@@ -54,7 +60,13 @@ static const Map<String,dynamic> en = {
   "year": "year",
   "start_date": "Start date",
   "end_date": "End date",
-  "not_signed_in": "Not signed in"
+  "not_signed_in": "Not signed in",
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "support": "Support",
+  "up_comings": "Up comings",
+  "feature_process": "Feature is under development process"
 };
 static const Map<String,dynamic> uz = {
   "sign_in_google": "Google orqali kirish",
@@ -75,7 +87,13 @@ static const Map<String,dynamic> uz = {
   "year": "yil",
   "start_date": "Boshlanish sanasi",
   "end_date": "Tugash sanasi",
-  "not_signed_in": "Profilega kirilmagan"
+  "not_signed_in": "Profilega kirilmagan",
+  "light": "Yorug'",
+  "dark": "Tungi",
+  "system": "Avtomatik",
+  "support": "Qo'llash",
+  "up_comings": "Kutilayotganlar",
+  "feature_process": "Ushbu xizmat dasturi tuzilish jarayonida"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "en": en, "uz": uz};
 }

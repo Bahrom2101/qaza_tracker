@@ -68,6 +68,32 @@ class _AppDrawerState extends State<AppDrawer> {
             ),
           ),
           ListTile(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text(LocaleKeys.support.tr()),
+                  content: Text(LocaleKeys.feature_process.tr()),
+                ),
+              );
+            },
+            leading: const Icon(Icons.feedback_outlined),
+            title: Text(LocaleKeys.support.tr()),
+          ),
+          ListTile(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text(LocaleKeys.up_comings.tr()),
+                  content: Text(LocaleKeys.feature_process.tr()),
+                ),
+              );
+            },
+            leading: const Icon(Icons.upcoming_outlined),
+            title: Text(LocaleKeys.up_comings.tr()),
+          ),
+          ListTile(
             title: OutlinedButton(
               onPressed: () async {
                 Navigator.pushNamedAndRemoveUntil(
@@ -154,33 +180,33 @@ class _AppDrawerState extends State<AppDrawer> {
   ];
 
   List<DropdownMenuItem<String>> itemsThemeMode = [
-    const DropdownMenuItem(
+    DropdownMenuItem(
       value: light,
       child: Row(
         children: [
-          Icon(Icons.light_mode_outlined),
+          const Icon(Icons.light_mode_outlined),
           kWidth8,
-          Text('Light'),
+          Text(LocaleKeys.light.tr()),
         ],
       ),
     ),
-    const DropdownMenuItem(
+    DropdownMenuItem(
       value: dark,
       child: Row(
         children: [
-          Icon(Icons.dark_mode),
+          const Icon(Icons.dark_mode),
           kWidth8,
-          Text("Dark"),
+          Text(LocaleKeys.dark.tr()),
         ],
       ),
     ),
-    const DropdownMenuItem(
+    DropdownMenuItem(
       value: system,
       child: Row(
         children: [
-          Icon(Icons.dark_mode_outlined),
+          const Icon(Icons.dark_mode_outlined),
           kWidth8,
-          Text('System'),
+          Text(LocaleKeys.system.tr()),
         ],
       ),
     ),

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:qaza_tracker/src/config/constants/constants.dart';
 import 'package:qaza_tracker/src/config/routes/app_routes.dart';
 import 'package:qaza_tracker/src/features/main/domain/entities/user_entity.dart';
@@ -65,27 +66,40 @@ class _MainPageState extends State<MainPage>
               ],
             ),
             drawer: const AppDrawer(),
-            body: ListView.separated(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-              itemBuilder: (_, index) {
-                var salahCount = getSalahCount(index, state.user);
-                return QazaItem(
-                  locked: locked,
-                  onTapPlus: () =>
-                      bloc.add(ChangeValueEvent(index, salahCount + 1)),
-                  onTapMinus: () =>
-                      bloc.add(ChangeValueEvent(index, salahCount - 1)),
-                  onChange: (value) => bloc.add(ChangeValueEvent(index, value)),
-                  width: AppConsts.size.width,
-                  name: getSalahName(index).tr(),
-                  count: salahCount,
-                );
-              },
-              shrinkWrap: true,
-              separatorBuilder: (_, index) {
-                return const SizedBox(height: 12);
-              },
-              itemCount: 6,
+            body: Stack(
+              children: [
+                ListView.separated(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                  itemBuilder: (_, index) {
+                    var salahCount = getSalahCount(index, state.user);
+                    return QazaItem(
+                      locked: locked,
+                      onTapPlus: () =>
+                          bloc.add(ChangeValueEvent(index, salahCount + 1)),
+                      onTapMinus: () =>
+                          bloc.add(ChangeValueEvent(index, salahCount - 1)),
+                      onChange: (value) =>
+                          bloc.add(ChangeValueEvent(index, value)),
+                      width: AppConsts.size.width,
+                      name: getSalahName(index).tr(),
+                      count: salahCount,
+                    );
+                  },
+                  shrinkWrap: true,
+                  separatorBuilder: (_, index) {
+                    return const SizedBox(height: 12);
+                  },
+                  itemCount: 6,
+                ),
+                if (state.statusFetch.isInProgress)
+                  Container(
+                    color: Colors.black38,
+                    child: const Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    ),
+                  ),
+              ],
             ),
           );
         },

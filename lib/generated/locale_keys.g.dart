@@ -20,5 +20,11 @@ abstract class  LocaleKeys {
   static const start_date = 'start_date';
   static const end_date = 'end_date';
   static const not_signed_in = 'not_signed_in';
+  static const light = 'light';
+  static const dark = 'dark';
+  static const system = 'system';
+  static const support = 'support';
+  static const up_comings = 'up_comings';
+  static const feature_process = 'feature_process';
 
 }

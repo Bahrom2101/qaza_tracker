@@ -17,5 +17,11 @@
   "year": "yil",
   "start_date": "Boshlanish sanasi",
   "end_date": "Tugash sanasi",
-  "not_signed_in": "Profilega kirilmagan"
+  "not_signed_in": "Profilega kirilmagan",
+  "light": "Yorug'",
+  "dark": "Tungi",
+  "system": "Avtomatik",
+  "support": "Qo'llash",
+  "up_comings": "Kutilayotganlar",
+  "feature_process": "Ushbu xizmat dasturi tuzilish jarayonida"
 }
