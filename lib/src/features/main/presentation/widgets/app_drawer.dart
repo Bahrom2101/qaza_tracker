@@ -179,7 +179,7 @@ class _AppDrawerState extends State<AppDrawer> {
     ),
   ];
 
-  List<DropdownMenuItem<String>> itemsThemeMode = [
+  List<DropdownMenuItem<String>> get itemsThemeMode => [
     DropdownMenuItem(
       value: light,
       child: Row(
