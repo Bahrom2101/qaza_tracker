@@ -5,16 +5,16 @@ import 'package:qaza_tracker/src/config/constants/constants.dart';
 import 'package:qaza_tracker/src/features/common/presentation/components/text_inputs/app_text_input.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-class CustomDateRange extends StatefulWidget {
-  const CustomDateRange({
+class DateSelectPage extends StatefulWidget {
+  const DateSelectPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  CustomDateRangeState createState() => CustomDateRangeState();
+  DateSelectPageState createState() => DateSelectPageState();
 }
 
-class CustomDateRangeState extends State<CustomDateRange> {
+class DateSelectPageState extends State<DateSelectPage> {
   DateTime? start;
   DateTime? end;
   var dayStart = TextEditingController();
