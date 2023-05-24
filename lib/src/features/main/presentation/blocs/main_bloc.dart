@@ -37,7 +37,6 @@ class MainBloc extends Bloc<MainEvent, MainState> {
         user = const UserModel();
       }
     }
-    print('here is the code');
     LocalStorage.setUser(user);
     emit(state.copWith(user: user));
     add(const ChangeStatusEvent(FormzSubmissionStatus.success));
