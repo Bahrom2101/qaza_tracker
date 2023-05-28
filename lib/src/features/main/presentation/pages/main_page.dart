@@ -107,43 +107,25 @@ class _MainPageState extends State<MainPage>
     );
   }
 
-  String getSalahName(int index) {
-    switch (index) {
-      case 0:
-        return 'fajr';
-      case 1:
-        return 'zuhr';
-      case 2:
-        return 'asr';
-      case 3:
-        return 'maghrib';
-      case 4:
-        return 'isha';
-      case 5:
-        return 'witr';
-      default:
-        return 'fajr';
-    }
-  }
+  String getSalahName(int index) => switch (index) {
+        0 => 'fajr',
+        1 => 'zuhr',
+        2 => 'asr',
+        3 => 'maghrib',
+        4 => 'isha',
+        5 => 'witr',
+        _ => 'fajr',
+      };
 
-  int getSalahCount(int index, UserEntity user) {
-    switch (index) {
-      case 0:
-        return user.fajr;
-      case 1:
-        return user.zuhr;
-      case 2:
-        return user.asr;
-      case 3:
-        return user.maghrib;
-      case 4:
-        return user.isha;
-      case 5:
-        return user.witr;
-      default:
-        return user.fajr;
-    }
-  }
+  int getSalahCount(int index, UserEntity user) => switch (index) {
+        0 => user.fajr,
+        1 => user.zuhr,
+        2 => user.asr,
+        3 => user.maghrib,
+        4 => user.isha,
+        5 => user.witr,
+        _ => user.fajr,
+      };
 
   @override
   bool get wantKeepAlive => true;

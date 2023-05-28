@@ -29,6 +29,7 @@ dependencies:
   sign_in_with_apple: ^4.3.0
   crypto: ^3.0.1
   syncfusion_flutter_datepicker: ^21.1.41
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:

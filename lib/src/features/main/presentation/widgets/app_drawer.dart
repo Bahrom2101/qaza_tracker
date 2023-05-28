@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:qaza_tracker/src/config/themes/app_icons.dart';
 import 'package:qaza_tracker/src/core/local_source/local_storage.dart';
 import 'package:qaza_tracker/src/features/app/presentation/blocs/app_bloc.dart';
 import 'package:qaza_tracker/src/features/main/presentation/blocs/main_bloc.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({
@@ -134,7 +136,13 @@ class _AppDrawerState extends State<AppDrawer> {
                   .appBarTheme
                   .backgroundColor
                   ?.withOpacity(0.5),
-              backgroundImage: NetworkImage(LocalStorage.image),
+              backgroundImage: CachedNetworkImageProvider(
+                LocalStorage.image,
+                cacheManager: CacheManager(Config(
+                  LocalStorage.email,
+                  maxNrOfCacheObjects: 10,
+                )),
+              ),
             ),
             kHeight8,
             Text(
