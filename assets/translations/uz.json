@@ -23,5 +23,8 @@
   "system": "Avtomatik",
   "support": "Qo'llash",
   "up_comings": "Kutilayotganlar",
-  "feature_process": "Ushbu xizmat dasturi tuzilish jarayonida"
+  "feature_process": "Ushbu xizmat dasturi tuzilish jarayonida",
+  "last_time": "Oxirgi safar",
+  "added": "Qo'shildi",
+  "subtracted": "Ayrildi"
 }

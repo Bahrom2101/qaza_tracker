@@ -16,8 +16,15 @@ class ChangeStatusEvent extends MainEvent {
 class ChangeValueEvent extends MainEvent {
   final int index;
   final int value;
+  final String salah;
+  final int amount;
 
-  const ChangeValueEvent(this.index, this.value);
+  const ChangeValueEvent({
+    required this.index,
+    required this.value,
+    required this.salah,
+    required this.amount,
+  });
 }
 
 class AddPeriodEvent extends MainEvent {

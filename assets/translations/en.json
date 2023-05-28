@@ -23,5 +23,8 @@
   "system": "System",
   "support": "Support",
   "up_comings": "Up comings",
-  "feature_process": "Feature is under development process"
+  "feature_process": "Feature is under development process",
+  "last_time": "Last time",
+  "added": "Added",
+  "subtracted": "Subtracted"
 }

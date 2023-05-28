@@ -45,20 +45,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         );
         var userCredential =
             await FirebaseAuth.instance.signInWithCredential(credential);
-        var users = FirebaseFirestore.instance.collection(usersCollection);
-        var documentSnapshot =
-            await users.doc(userCredential.user?.email ?? '').get();
-        if (documentSnapshot.data() == null) {
-          users.doc(userCredential.user?.email ?? '').set(UserModel(
-                email: userCredential.user?.email ?? '',
-                fajr: 0,
-                zuhr: 0,
-                asr: 0,
-                maghrib: 0,
-                isha: 0,
-                witr: 0,
-              ).toJson());
-        }
+
+        await setUserDocument(userCredential);
+
         LocalStorage.setEmail(userCredential.user?.email ?? '');
         LocalStorage.setImage(userCredential.user?.photoURL ?? '');
         LocalStorage.setSigned(true);
@@ -98,20 +87,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
       var userCredential =
           await FirebaseAuth.instance.signInWithCredential(oauthCredential);
-      var users = FirebaseFirestore.instance.collection(usersCollection);
-      var documentSnapshot =
-          await users.doc(userCredential.user?.email ?? '').get();
-      if (documentSnapshot.data() == null) {
-        users.doc(userCredential.user?.email ?? '').set(UserModel(
-              email: userCredential.user?.email ?? '',
-              fajr: 0,
-              zuhr: 0,
-              asr: 0,
-              maghrib: 0,
-              isha: 0,
-              witr: 0,
-            ).toJson());
-      }
+
+      await setUserDocument(userCredential);
+
       LocalStorage.setEmail(userCredential.user?.email ?? '');
       LocalStorage.setImage(userCredential.user?.photoURL ?? '');
       LocalStorage.setSigned(true);
@@ -121,6 +99,23 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         FormzSubmissionStatus.failure,
         LocaleKeys.error_occurred.tr(),
       ));
+    }
+  }
+
+  Future setUserDocument(UserCredential userCredential) async {
+    var users = FirebaseFirestore.instance.collection(usersCollection);
+    var userDocument = await users.doc(userCredential.user?.email ?? '').get();
+    if (userDocument.data() == null) {
+      users.doc(userCredential.user?.email ?? '').set(UserModel(
+            email: userCredential.user?.email ?? '',
+            fajr: 0,
+            zuhr: 0,
+            asr: 0,
+            maghrib: 0,
+            isha: 0,
+            witr: 0,
+            changes: const {},
+          ).toJson());
     }
   }
 

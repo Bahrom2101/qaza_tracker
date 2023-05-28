@@ -39,7 +39,10 @@ class CodegenLoader extends AssetLoader{
   "system": "Системный",
   "support": "Поддерживать",
   "up_comings": "Предстоящие",
-  "feature_process": "Функция находится в процессе разработки"
+  "feature_process": "Функция находится в процессе разработки",
+  "last_time": "Последний раз",
+  "added": "Добавлен",
+  "subtracted": "Вычтено"
 };
 static const Map<String,dynamic> en = {
   "sign_in_google": "Sign in with Google",
@@ -66,7 +69,10 @@ static const Map<String,dynamic> en = {
   "system": "System",
   "support": "Support",
   "up_comings": "Up comings",
-  "feature_process": "Feature is under development process"
+  "feature_process": "Feature is under development process",
+  "last_time": "Last time",
+  "added": "Added",
+  "subtracted": "Subtracted"
 };
 static const Map<String,dynamic> uz = {
   "sign_in_google": "Google orqali kirish",
@@ -93,7 +99,10 @@ static const Map<String,dynamic> uz = {
   "system": "Avtomatik",
   "support": "Qo'llash",
   "up_comings": "Kutilayotganlar",
-  "feature_process": "Ushbu xizmat dasturi tuzilish jarayonida"
+  "feature_process": "Ushbu xizmat dasturi tuzilish jarayonida",
+  "last_time": "Oxirgi safar",
+  "added": "Qo'shildi",
+  "subtracted": "Ayrildi"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": ru, "en": en, "uz": uz};
 }

@@ -73,17 +73,32 @@ class _MainPageState extends State<MainPage>
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
                   itemBuilder: (_, index) {
                     var salahCount = getSalahCount(index, state.user);
+                    var amountAndTime = getAmountAndTime(index, state.user);
                     return QazaItem(
                       locked: locked,
-                      onTapPlus: () =>
-                          bloc.add(ChangeValueEvent(index, salahCount + 1)),
-                      onTapMinus: () =>
-                          bloc.add(ChangeValueEvent(index, salahCount - 1)),
-                      onChange: (value) =>
-                          bloc.add(ChangeValueEvent(index, value)),
+                      onTapPlus: () => bloc.add(ChangeValueEvent(
+                        index: index,
+                        value: salahCount + 1,
+                        salah: getSalahName(index),
+                        amount: 1,
+                      )),
+                      onTapMinus: () => bloc.add(ChangeValueEvent(
+                        index: index,
+                        value: salahCount - 1,
+                        salah: getSalahName(index),
+                        amount: -1,
+                      )),
+                      onChange: (value) => bloc.add(ChangeValueEvent(
+                        index: index,
+                        value: value,
+                        salah: getSalahName(index),
+                        amount: value - salahCount,
+                      )),
                       width: AppConsts.size.width,
                       name: getSalahName(index).tr(),
                       count: salahCount,
+                      lastChangeAmount: amountAndTime.$1,
+                      lastChangeTime: amountAndTime.$2,
                     );
                   },
                   shrinkWrap: true,
@@ -125,6 +140,37 @@ class _MainPageState extends State<MainPage>
         4 => user.isha,
         5 => user.witr,
         _ => user.fajr,
+      };
+
+  (int, String) getAmountAndTime(int index, UserEntity user) => switch (index) {
+        0 => (
+            user.changes?[fajr]?.changeAmount ?? 0,
+            user.changes?[fajr]?.changeTime ?? '',
+          ),
+        1 => (
+            user.changes?[zuhr]?.changeAmount ?? 0,
+            user.changes?[zuhr]?.changeTime ?? '',
+          ),
+        2 => (
+            user.changes?[asr]?.changeAmount ?? 0,
+            user.changes?[asr]?.changeTime ?? '',
+          ),
+        3 => (
+            user.changes?[maghrib]?.changeAmount ?? 0,
+            user.changes?[maghrib]?.changeTime ?? '',
+          ),
+        4 => (
+            user.changes?[isha]?.changeAmount ?? 0,
+            user.changes?[isha]?.changeTime ?? '',
+          ),
+        5 => (
+            user.changes?[witr]?.changeAmount ?? 0,
+            user.changes?[witr]?.changeTime ?? '',
+          ),
+        _ => (
+            user.changes?[fajr]?.changeAmount ?? 0,
+            user.changes?[fajr]?.changeTime ?? '',
+          ),
       };
 
   @override

@@ -26,6 +26,13 @@ const dark = 'dark';
 const light = 'light';
 const system = 'system';
 const usersCollection = 'users';
+const appDateFormat = 'dd.MM.yyyy HH:mm:ss';
+const fajr = 'fajr';
+const zuhr = 'zuhr';
+const asr = 'asr';
+const maghrib = 'maghrib';
+const isha = 'isha';
+const witr = 'witr';
 
 const kBorderRadius = 30.0;
 

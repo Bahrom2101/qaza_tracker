@@ -26,5 +26,8 @@ abstract class  LocaleKeys {
   static const support = 'support';
   static const up_comings = 'up_comings';
   static const feature_process = 'feature_process';
+  static const last_time = 'last_time';
+  static const added = 'added';
+  static const subtracted = 'subtracted';
 
 }

@@ -24,6 +24,11 @@ class MainBloc extends Bloc<MainEvent, MainState> {
 
   _init(InitialEvent event, Emitter<MainState> emit) async {
     add(const ChangeStatusEvent(FormzSubmissionStatus.inProgress));
+    await getUser(emit);
+    add(const ChangeStatusEvent(FormzSubmissionStatus.success));
+  }
+
+  Future getUser(Emitter<MainState> emit) async {
     UserModel user;
     if (LocalStorage.email.isEmpty) {
       user = LocalStorage.user;
@@ -39,7 +44,6 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     }
     LocalStorage.setUser(user);
     emit(state.copWith(user: user));
-    add(const ChangeStatusEvent(FormzSubmissionStatus.success));
   }
 
   Future _onChangeStatus(
@@ -51,16 +55,19 @@ class MainBloc extends Bloc<MainEvent, MainState> {
   }
 
   Future _onChangeValue(ChangeValueEvent event, Emitter<MainState> emit) async {
-    var userEntity = state.user.copWith(
+    var user = state.user.copWith(
       index: event.index,
       value: event.value,
+      salah: event.salah,
+      amount: event.amount,
     );
     if (LocalStorage.email.isNotEmpty) {
       var users = FirebaseFirestore.instance.collection(usersCollection);
-      users.doc(LocalStorage.email).update(userEntity.toJson());
+      var doc = users.doc(LocalStorage.email);
+      doc.update(user.toJson());
     }
-    LocalStorage.setUser(userEntity);
-    emit(state.copWith(user: userEntity));
+    LocalStorage.setUser(user);
+    emit(state.copWith(user: user));
   }
 
   _onAddPeriod(AddPeriodEvent event, Emitter<MainState> emit) {

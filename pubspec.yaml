@@ -21,7 +21,7 @@ dependencies:
   equatable: ^2.0.5
   keyboard_dismisser: ^3.0.0
   formz: ^0.6.0
-  json_annotation: ^4.8.0
+  json_annotation: ^4.8.1
   meta: ^1.8.0
   flutter_svg: ^2.0.5
   google_sign_in: ^6.1.0

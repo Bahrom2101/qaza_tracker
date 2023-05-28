@@ -1,5 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:qaza_tracker/generated/locale_keys.g.dart';
 import 'package:qaza_tracker/src/config/constants/constants.dart';
 import 'package:qaza_tracker/src/features/common/presentation/components/text_inputs/app_text_input.dart';
 
@@ -13,6 +14,8 @@ class QazaItem extends StatefulWidget {
     required this.count,
     required this.onChange,
     required this.locked,
+    required this.lastChangeAmount,
+    required this.lastChangeTime,
   }) : super(key: key);
 
   final VoidCallback onTapPlus;
@@ -22,6 +25,8 @@ class QazaItem extends StatefulWidget {
   final int count;
   final Function(int) onChange;
   final bool locked;
+  final int lastChangeAmount;
+  final String lastChangeTime;
 
   @override
   State<QazaItem> createState() => _QazaItemState();
@@ -52,10 +57,14 @@ class _QazaItemState extends State<QazaItem> {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget.name,
-            style: const TextStyle(fontSize: 16),
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              widget.name,
+              style: const TextStyle(fontSize: 16),
+            ),
           ),
           kHeight8,
           Row(
@@ -93,8 +102,27 @@ class _QazaItemState extends State<QazaItem> {
               ),
             ],
           ),
+          kHeight8,
+          if (widget.lastChangeAmount != 0 || widget.lastChangeTime != '')
+            Text(
+              '${LocaleKeys.last_time.tr()}: ${typeOfAction(widget.lastChangeAmount).tr()} '
+              '${widget.lastChangeAmount.abs()} ${context.locale.languageCode == 'uz' ? 'ta ' : ''} | '
+              '${DateFormat(null, context.locale.languageCode).format(DateFormat(appDateFormat).parse(widget.lastChangeTime))}',
+              style: const TextStyle(
+                fontSize: 14,
+                color: Colors.blueGrey,
+              ),
+            ),
         ],
       ),
     );
+  }
+
+  String typeOfAction(int count) {
+    if (count > 0) {
+      return 'added';
+    } else {
+      return 'subtracted';
+    }
   }
 }

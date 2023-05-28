@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:qaza_tracker/src/features/main/domain/entities/history_entity.dart';
 import 'package:qaza_tracker/src/features/main/domain/entities/user_entity.dart';
 
 part 'user_model.g.dart';
@@ -13,6 +14,7 @@ class UserModel extends UserEntity {
     super.maghrib,
     super.isha,
     super.witr,
+    super.changes,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
