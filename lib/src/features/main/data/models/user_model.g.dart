@@ -16,7 +16,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       witr: json['witr'] as int? ?? 0,
       changes: (json['changes'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(
-            k, const HistoryConverter().fromJson(e as Map<String, dynamic>)),
+            k, const ChangeConverter().fromJson(e as Map<String, dynamic>)),
       ),
     );
 
@@ -29,5 +29,5 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'isha': instance.isha,
       'witr': instance.witr,
       'changes': instance.changes
-          ?.map((k, e) => MapEntry(k, const HistoryConverter().toJson(e))),
+          ?.map((k, e) => MapEntry(k, const ChangeConverter().toJson(e))),
     };

@@ -26,6 +26,7 @@ const dark = 'dark';
 const light = 'light';
 const system = 'system';
 const usersCollection = 'users';
+const historiesCollection = 'histories';
 const appDateFormat = 'dd.MM.yyyy HH:mm:ss';
 const fajr = 'fajr';
 const zuhr = 'zuhr';

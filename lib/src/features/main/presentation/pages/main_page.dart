@@ -18,8 +18,7 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage>
-    with AutomaticKeepAliveClientMixin {
+class _MainPageState extends State<MainPage> {
   late MainBloc bloc;
   bool locked = true;
 
@@ -34,7 +33,6 @@ class _MainPageState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     AppConsts.setSize(context);
     return BlocProvider(
       create: (context) => bloc,
@@ -73,32 +71,34 @@ class _MainPageState extends State<MainPage>
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
                   itemBuilder: (_, index) {
                     var salahCount = getSalahCount(index, state.user);
-                    var amountAndTime = getAmountAndTime(index, state.user);
+                    var salahName = getSalahName(index);
                     return QazaItem(
+                      onTapItem: () {
+                        Navigator.of(context)
+                            .pushNamed(AppRoutes.history, arguments: salahName);
+                      },
                       locked: locked,
                       onTapPlus: () => bloc.add(ChangeValueEvent(
                         index: index,
                         value: salahCount + 1,
-                        salah: getSalahName(index),
+                        salah: salahName,
                         amount: 1,
                       )),
                       onTapMinus: () => bloc.add(ChangeValueEvent(
                         index: index,
                         value: salahCount - 1,
-                        salah: getSalahName(index),
+                        salah: salahName,
                         amount: -1,
                       )),
                       onChange: (value) => bloc.add(ChangeValueEvent(
                         index: index,
                         value: value,
-                        salah: getSalahName(index),
+                        salah: salahName,
                         amount: value - salahCount,
                       )),
                       width: AppConsts.size.width,
                       name: getSalahName(index).tr(),
                       count: salahCount,
-                      lastChangeAmount: amountAndTime.$1,
-                      lastChangeTime: amountAndTime.$2,
                     );
                   },
                   shrinkWrap: true,
@@ -141,38 +141,4 @@ class _MainPageState extends State<MainPage>
         5 => user.witr,
         _ => user.fajr,
       };
-
-  (int, String) getAmountAndTime(int index, UserEntity user) => switch (index) {
-        0 => (
-            user.changes?[fajr]?.changeAmount ?? 0,
-            user.changes?[fajr]?.changeTime ?? '',
-          ),
-        1 => (
-            user.changes?[zuhr]?.changeAmount ?? 0,
-            user.changes?[zuhr]?.changeTime ?? '',
-          ),
-        2 => (
-            user.changes?[asr]?.changeAmount ?? 0,
-            user.changes?[asr]?.changeTime ?? '',
-          ),
-        3 => (
-            user.changes?[maghrib]?.changeAmount ?? 0,
-            user.changes?[maghrib]?.changeTime ?? '',
-          ),
-        4 => (
-            user.changes?[isha]?.changeAmount ?? 0,
-            user.changes?[isha]?.changeTime ?? '',
-          ),
-        5 => (
-            user.changes?[witr]?.changeAmount ?? 0,
-            user.changes?[witr]?.changeTime ?? '',
-          ),
-        _ => (
-            user.changes?[fajr]?.changeAmount ?? 0,
-            user.changes?[fajr]?.changeTime ?? '',
-          ),
-      };
-
-  @override
-  bool get wantKeepAlive => true;
 }

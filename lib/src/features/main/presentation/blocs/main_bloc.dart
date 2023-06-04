@@ -2,12 +2,15 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:qaza_tracker/src/config/constants/constants.dart';
 import 'package:qaza_tracker/src/core/local_source/local_storage.dart';
+import 'package:qaza_tracker/src/features/history/data/models/history_model.dart';
 import 'package:qaza_tracker/src/features/main/data/models/user_model.dart';
 import 'package:qaza_tracker/src/features/main/domain/entities/user_entity.dart';
+import 'package:uuid/uuid.dart';
 
 part 'main_event.dart';
 
@@ -55,16 +58,27 @@ class MainBloc extends Bloc<MainEvent, MainState> {
   }
 
   Future _onChangeValue(ChangeValueEvent event, Emitter<MainState> emit) async {
+    var time = DateFormat(appDateFormat).format(DateTime.now());
     var user = state.user.copWith(
       index: event.index,
       value: event.value,
       salah: event.salah,
       amount: event.amount,
+      time: time,
     );
     if (LocalStorage.email.isNotEmpty) {
-      var users = FirebaseFirestore.instance.collection(usersCollection);
-      var doc = users.doc(LocalStorage.email);
-      doc.update(user.toJson());
+      var uuid = const Uuid();
+      var userCollection = FirebaseFirestore.instance.collection(usersCollection);
+      var historyCollection = FirebaseFirestore.instance.collection(historiesCollection);
+      var docUser = userCollection.doc(LocalStorage.email);
+      var docHistory = historyCollection.doc(uuid.v4());
+      docUser.update(user.toJson());
+      docHistory.set(HistoryModel(
+        salah: event.salah,
+        email: LocalStorage.email,
+        amount: event.amount,
+        time: time,
+      ).toJson());
     }
     LocalStorage.setUser(user);
     emit(state.copWith(user: user));

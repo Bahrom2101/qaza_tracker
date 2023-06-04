@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:qaza_tracker/src/features/main/domain/entities/history_entity.dart';
+import 'package:qaza_tracker/src/features/main/domain/entities/change_entity.dart';
 import 'package:qaza_tracker/src/features/main/domain/entities/user_entity.dart';
 
 part 'user_model.g.dart';

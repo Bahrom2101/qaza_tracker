@@ -1,14 +1,18 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:qaza_tracker/src/features/main/data/models/history_model.dart';
+import 'package:qaza_tracker/src/features/history/data/models/history_model.dart';
 
 class HistoryEntity extends Equatable {
-  final int changeAmount;
-  final String changeTime;
+  final String email;
+  final String salah;
+  final int amount;
+  final String time;
 
   const HistoryEntity({
-    this.changeAmount = 0,
-    this.changeTime = '',
+    this.email = '',
+    this.salah = '',
+    this.amount = 0,
+    this.time = '',
   });
 
   factory HistoryEntity.fromJson(Map<String, dynamic> json) =>
@@ -16,9 +20,11 @@ class HistoryEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-        changeAmount,
-        changeTime,
-      ];
+    email,
+    salah,
+    amount,
+    time,
+  ];
 }
 
 class HistoryConverter
@@ -31,7 +37,9 @@ class HistoryConverter
 
   @override
   Map<String, dynamic> toJson(HistoryEntity object) => <String, dynamic>{
-        'change_amount': object.changeAmount,
-        'change_time': object.changeTime,
-      };
+    'salah': object.salah,
+    'email': object.email,
+    'amount': object.amount,
+    'time': object.time,
+  };
 }

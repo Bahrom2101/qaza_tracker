@@ -1,9 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
-import 'package:qaza_tracker/src/config/constants/constants.dart';
-import 'package:qaza_tracker/src/features/main/data/models/history_model.dart';
+import 'package:qaza_tracker/src/features/main/data/models/change_model.dart';
 import 'package:qaza_tracker/src/features/main/data/models/user_model.dart';
-import 'package:qaza_tracker/src/features/main/domain/entities/history_entity.dart';
+import 'package:qaza_tracker/src/features/main/domain/entities/change_entity.dart';
 
 class UserEntity extends Equatable {
   final String email;
@@ -13,8 +11,8 @@ class UserEntity extends Equatable {
   final int maghrib;
   final int isha;
   final int witr;
-  @HistoryConverter()
-  final Map<String, HistoryEntity>? changes;
+  @ChangeConverter()
+  final Map<String, ChangeEntity>? changes;
 
   @override
   String toString() {
@@ -37,12 +35,13 @@ class UserEntity extends Equatable {
     required int value,
     required String salah,
     required int amount,
+    required String time,
   }) {
-    final Map<String, HistoryEntity> map = {};
+    final Map<String, ChangeEntity> map = {};
     map.addAll(changes ?? {});
-    map[salah] = HistoryModel(
+    map[salah] = ChangeModel(
       changeAmount: amount,
-      changeTime: DateFormat(appDateFormat).format(DateTime.now()),
+      changeTime: time,
     );
     return UserModel(
       email: email,

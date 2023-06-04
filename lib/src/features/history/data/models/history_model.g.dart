@@ -7,12 +7,16 @@ part of 'history_model.dart';
 // **************************************************************************
 
 HistoryModel _$HistoryModelFromJson(Map<String, dynamic> json) => HistoryModel(
-      changeAmount: json['change_amount'] as int? ?? 0,
-      changeTime: json['change_time'] as String? ?? '',
+      email: json['email'] as String? ?? '',
+      salah: json['salah'] as String? ?? '',
+      amount: json['amount'] as int? ?? 0,
+      time: json['time'] as String? ?? '',
     );
 
 Map<String, dynamic> _$HistoryModelToJson(HistoryModel instance) =>
     <String, dynamic>{
-      'change_amount': instance.changeAmount,
-      'change_time': instance.changeTime,
+      'email': instance.email,
+      'salah': instance.salah,
+      'amount': instance.amount,
+      'time': instance.time,
     };
