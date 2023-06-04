@@ -24,7 +24,7 @@ class HistoryItem extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Text('${typeOfAction(amount).tr()} | '
+            child: Text('${typeOfAction(amount).tr()} ${amount.abs()} | '
                 '${DateFormat(null, context.locale.languageCode).format(DateFormat(appDateFormat).parse(time))}'),
           ),
           IconButton(

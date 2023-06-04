@@ -68,8 +68,12 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     );
     if (LocalStorage.email.isNotEmpty) {
       var uuid = const Uuid();
-      var userCollection = FirebaseFirestore.instance.collection(usersCollection);
-      var historyCollection = FirebaseFirestore.instance.collection(historiesCollection);
+      var userCollection =
+          FirebaseFirestore.instance.collection(usersCollection);
+      var historyCollection = FirebaseFirestore.instance
+          .collection(usersCollection)
+          .doc(LocalStorage.email)
+          .collection(historiesCollection);
       var docUser = userCollection.doc(LocalStorage.email);
       var docHistory = historyCollection.doc(uuid.v4());
       docUser.update(user.toJson());

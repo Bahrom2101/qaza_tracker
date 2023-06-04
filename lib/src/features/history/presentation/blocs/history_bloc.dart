@@ -34,9 +34,10 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
 
   Future getHistories(Emitter<HistoryState> emit, String salah) async {
     await FirebaseFirestore.instance
+        .collection(usersCollection)
+        .doc(LocalStorage.email)
         .collection(historiesCollection)
         .where('salah', isEqualTo: salah)
-        .where('email', isEqualTo: LocalStorage.email)
         .orderBy('time', descending: true)
         .get()
         .then(
