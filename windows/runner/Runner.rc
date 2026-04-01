@@ -93,7 +93,7 @@ BEGIN
             VALUE "FileDescription", "qaza_tracker" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "qaza_tracker" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 uz.bahrom. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 uz.bahrom. All rights reserved." "\0"
             VALUE "OriginalFilename", "qaza_tracker.exe" "\0"
             VALUE "ProductName", "qaza_tracker" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
