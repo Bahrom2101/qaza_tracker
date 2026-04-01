@@ -11,8 +11,8 @@ import 'package:qaza_tracker/src/features/main/presentation/widgets/qaza_item.da
 
 class MainPage extends StatefulWidget {
   const MainPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<MainPage> createState() => _MainPageState();

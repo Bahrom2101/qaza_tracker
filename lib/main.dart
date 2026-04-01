@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:qaza_tracker/generated/codegen_loader.g.dart';
 import 'package:qaza_tracker/src/config/constants/constants.dart';
 import 'package:qaza_tracker/src/core/get_it/service_locator.dart';
@@ -19,6 +20,7 @@ void main() async {
     await setupLocator();
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform);
+    await GoogleSignIn.instance.initialize();
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
 
     runApp(

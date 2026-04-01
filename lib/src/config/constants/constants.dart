@@ -13,7 +13,7 @@ class AppConsts {
   static Size get size => _size ?? const Size(0, 0);
   static Size? _size;
 
-  static setSize(BuildContext context) async {
+  static Future<void> setSize(BuildContext context) async {
     _size ??= MediaQuery.of(context).size;
   }
 }

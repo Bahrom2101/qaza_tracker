@@ -25,7 +25,7 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     on<UpdateEvent>(_onUpdate);
   }
 
-  _init(InitialEvent event, Emitter<MainState> emit) async {
+  Future<void> _init(InitialEvent event, Emitter<MainState> emit) async {
     add(const ChangeStatusEvent(FormzSubmissionStatus.inProgress));
     await getUser(emit);
     add(const ChangeStatusEvent(FormzSubmissionStatus.success));
@@ -88,7 +88,7 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     emit(state.copWith(user: user));
   }
 
-  _onAddPeriod(AddPeriodEvent event, Emitter<MainState> emit) {
+  void _onAddPeriod(AddPeriodEvent event, Emitter<MainState> emit) {
     var userEntity = UserModel(
       email: state.user.email,
       fajr: state.user.fajr + event.days,
@@ -106,7 +106,7 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     emit(state.copWith(user: userEntity));
   }
 
-  _onUpdate(UpdateEvent event, Emitter<MainState> emit) {
+  void _onUpdate(UpdateEvent event, Emitter<MainState> emit) {
     emit(state.copWith(forUpdate: state.forUpdate + 1));
   }
 }

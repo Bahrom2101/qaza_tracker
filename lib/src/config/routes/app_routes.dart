@@ -5,7 +5,6 @@ import 'package:qaza_tracker/src/features/login/presentation/pages/login_page.da
 import 'package:qaza_tracker/src/features/main/presentation/pages/main_page.dart';
 
 abstract class AppRoutes {
-
   static const main = '/main';
   static const login = '/login';
   static const dateRange = '/date_range';
@@ -17,5 +16,4 @@ abstract class AppRoutes {
     dateRange: (context) => const DateSelectPage(),
     history: (context) => const HistoryPage(),
   };
-
 }

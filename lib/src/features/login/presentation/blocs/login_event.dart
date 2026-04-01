@@ -6,12 +6,10 @@ abstract class LoginEvent {
 }
 
 class GoogleSignInEvent extends LoginEvent {
-
   const GoogleSignInEvent();
 }
 
 class AppleSignInEvent extends LoginEvent {
-
   const AppleSignInEvent();
 }
 

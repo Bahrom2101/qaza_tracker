@@ -19,7 +19,7 @@ class HistoryItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Theme.of(context).primaryColorLight.withOpacity(0.2),
+        color: Theme.of(context).primaryColorLight.withValues(alpha: 0.2),
       ),
       child: Row(
         children: [

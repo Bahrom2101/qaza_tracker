@@ -15,9 +15,7 @@ import 'package:qaza_tracker/src/features/main/presentation/blocs/main_bloc.dart
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class AppDrawer extends StatefulWidget {
-  const AppDrawer({
-    Key? key,
-  }) : super(key: key);
+  const AppDrawer({super.key});
 
   @override
   State<AppDrawer> createState() => _AppDrawerState();
@@ -77,7 +75,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 context: context,
                 builder: (context) => AlertDialog(
                   title: Text(LocaleKeys.support.tr()),
-                  content: Text(LocaleKeys.feature_process.tr()),
+                  content: Text(LocaleKeys.featureProcess.tr()),
                 ),
               );
             },
@@ -89,13 +87,13 @@ class _AppDrawerState extends State<AppDrawer> {
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: Text(LocaleKeys.up_comings.tr()),
-                  content: Text(LocaleKeys.feature_process.tr()),
+                  title: Text(LocaleKeys.upComings.tr()),
+                  content: Text(LocaleKeys.featureProcess.tr()),
                 ),
               );
             },
             leading: const Icon(Icons.upcoming_outlined),
-            title: Text(LocaleKeys.up_comings.tr()),
+            title: Text(LocaleKeys.upComings.tr()),
           ),
           ListTile(
             title: OutlinedButton(
@@ -103,7 +101,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 Navigator.pushNamedAndRemoveUntil(
                     context, AppRoutes.login, (route) => false);
                 await FirebaseAuth.instance.signOut();
-                GoogleSignIn().signOut();
+                await GoogleSignIn.instance.signOut();
                 await LocalStorage.clearProfile();
               },
               style: OutlinedButton.styleFrom(
@@ -131,11 +129,11 @@ class _AppDrawerState extends State<AppDrawer> {
               backgroundColor: Theme.of(context)
                   .appBarTheme
                   .backgroundColor
-                  ?.withOpacity(0.5),
+                  ?.withValues(alpha: 0.5),
               foregroundColor: Theme.of(context)
                   .appBarTheme
                   .backgroundColor
-                  ?.withOpacity(0.5),
+                  ?.withValues(alpha: 0.5),
               backgroundImage: CachedNetworkImageProvider(
                 LocalStorage.image,
                 cacheManager: CacheManager(Config(
@@ -147,7 +145,7 @@ class _AppDrawerState extends State<AppDrawer> {
             kHeight8,
             Text(
               LocalStorage.email.isEmpty
-                  ? LocaleKeys.not_signed_in.tr()
+                  ? LocaleKeys.notSignedIn.tr()
                   : LocalStorage.email,
               style: const TextStyle(color: Colors.white),
             ),

@@ -33,40 +33,35 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copWith(statusLogin: event.status, message: event.message));
   }
 
-  _onGoogleSignIn(GoogleSignInEvent event, Emitter<LoginState> emit) async {
+  Future<void> _onGoogleSignIn(
+      GoogleSignInEvent event, Emitter<LoginState> emit) async {
     add(const ChangeStatusEvent(FormzSubmissionStatus.inProgress));
     try {
-      final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
-      if (gUser != null) {
-        final GoogleSignInAuthentication gAuth = await gUser.authentication;
-        var credential = GoogleAuthProvider.credential(
-          accessToken: gAuth.accessToken,
-          idToken: gAuth.idToken,
-        );
-        var userCredential =
-            await FirebaseAuth.instance.signInWithCredential(credential);
+      final GoogleSignInAccount gUser =
+          await GoogleSignIn.instance.authenticate();
+      final GoogleSignInAuthentication gAuth = gUser.authentication;
+      var credential = GoogleAuthProvider.credential(
+        idToken: gAuth.idToken,
+      );
+      var userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
 
-        await setUserDocument(userCredential);
+      await setUserDocument(userCredential);
 
-        LocalStorage.setEmail(userCredential.user?.email ?? '');
-        LocalStorage.setImage(userCredential.user?.photoURL ?? '');
-        LocalStorage.setSigned(true);
-        add(const ChangeStatusEvent(FormzSubmissionStatus.success));
-      } else {
-        add(ChangeStatusEvent(
-          FormzSubmissionStatus.failure,
-          LocaleKeys.error_occurred.tr(),
-        ));
-      }
+      LocalStorage.setEmail(userCredential.user?.email ?? '');
+      LocalStorage.setImage(userCredential.user?.photoURL ?? '');
+      LocalStorage.setSigned(true);
+      add(const ChangeStatusEvent(FormzSubmissionStatus.success));
     } catch (e) {
       add(ChangeStatusEvent(
         FormzSubmissionStatus.failure,
-        LocaleKeys.error_occurred.tr(),
+        LocaleKeys.errorOccurred.tr(),
       ));
     }
   }
 
-  _onAppleSignIn(AppleSignInEvent event, Emitter<LoginState> emit) async {
+  Future<void> _onAppleSignIn(
+      AppleSignInEvent event, Emitter<LoginState> emit) async {
     add(const ChangeStatusEvent(FormzSubmissionStatus.inProgress));
     try {
       final rawNonce = generateNonce();
@@ -97,7 +92,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     } catch (e) {
       add(ChangeStatusEvent(
         FormzSubmissionStatus.failure,
-        LocaleKeys.error_occurred.tr(),
+        LocaleKeys.errorOccurred.tr(),
       ));
     }
   }

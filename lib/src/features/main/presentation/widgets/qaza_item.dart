@@ -4,7 +4,7 @@ import 'package:qaza_tracker/src/features/common/presentation/components/text_in
 
 class QazaItem extends StatefulWidget {
   const QazaItem({
-    Key? key,
+    super.key,
     required this.onTapItem,
     required this.onTapPlus,
     required this.onTapMinus,
@@ -13,7 +13,7 @@ class QazaItem extends StatefulWidget {
     required this.count,
     required this.onChange,
     required this.locked,
-  }) : super(key: key);
+  });
 
   final VoidCallback onTapItem;
   final VoidCallback onTapPlus;
@@ -51,7 +51,7 @@ class _QazaItemState extends State<QazaItem> {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: Theme.of(context).primaryColorLight.withOpacity(0.2),
+          color: Theme.of(context).primaryColorLight.withValues(alpha: 0.2),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,

@@ -12,7 +12,7 @@ import 'package:qaza_tracker/src/core/local_source/local_storage.dart';
 import 'package:qaza_tracker/src/features/login/presentation/blocs/login_bloc.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -112,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                           bloc.add(const GoogleSignInEvent());
                         },
                         style: ButtonStyle(
-                            minimumSize: MaterialStateProperty.all(
+                            minimumSize: WidgetStateProperty.all(
                                 const Size.fromHeight(50))),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -124,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             kWidth16,
                             Text(
-                              LocaleKeys.sign_in_google.tr(),
+                              LocaleKeys.signInGoogle.tr(),
                               style: const TextStyle(fontSize: 16),
                             ),
                           ],
@@ -137,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                             bloc.add(const AppleSignInEvent());
                           },
                           style: ButtonStyle(
-                              minimumSize: MaterialStateProperty.all(
+                              minimumSize: WidgetStateProperty.all(
                                   const Size.fromHeight(50))),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -145,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                               const Icon(Icons.apple),
                               kWidth16,
                               Text(
-                                LocaleKeys.sign_in_apple.tr(),
+                                LocaleKeys.signInApple.tr(),
                                 style: const TextStyle(fontSize: 16),
                               ),
                             ],
@@ -162,23 +162,23 @@ class _LoginPageState extends State<LoginPage> {
                           );
                         },
                         style: ButtonStyle(
-                            minimumSize: MaterialStateProperty.all(
+                            minimumSize: WidgetStateProperty.all(
                                 const Size.fromHeight(50))),
                         child: Text(
-                          LocaleKeys.continue_without_sign_in.tr(),
+                          LocaleKeys.continueWithoutSignIn.tr(),
                           style: const TextStyle(fontSize: 16),
                         ),
                       ),
                     ],
                   ),
                 ),
-                if(state.statusLogin.isInProgress)
-                Container(
-                  color: Colors.black38,
-                  child: const Center(
-                    child: CircularProgressIndicator(color: Colors.white),
+                if (state.statusLogin.isInProgress)
+                  Container(
+                    color: Colors.black38,
+                    child: const Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    ),
                   ),
-                ),
               ],
             ),
           );
