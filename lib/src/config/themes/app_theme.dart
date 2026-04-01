@@ -17,8 +17,8 @@ class AppTheme {
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: Colors.black,
-        )),
+      foregroundColor: Colors.black,
+    )),
   );
 
   static final ThemeData dark = ThemeData(

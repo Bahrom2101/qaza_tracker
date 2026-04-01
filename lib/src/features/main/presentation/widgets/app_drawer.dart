@@ -15,9 +15,7 @@ import 'package:qaza_tracker/src/features/main/presentation/blocs/main_bloc.dart
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class AppDrawer extends StatefulWidget {
-  const AppDrawer({
-    Key? key,
-  }) : super(key: key);
+  const AppDrawer({super.key});
 
   @override
   State<AppDrawer> createState() => _AppDrawerState();
@@ -131,11 +129,11 @@ class _AppDrawerState extends State<AppDrawer> {
               backgroundColor: Theme.of(context)
                   .appBarTheme
                   .backgroundColor
-                  ?.withOpacity(0.5),
+                  ?.withValues(alpha: 0.5),
               foregroundColor: Theme.of(context)
                   .appBarTheme
                   .backgroundColor
-                  ?.withOpacity(0.5),
+                  ?.withValues(alpha: 0.5),
               backgroundImage: CachedNetworkImageProvider(
                 LocalStorage.image,
                 cacheManager: CacheManager(Config(

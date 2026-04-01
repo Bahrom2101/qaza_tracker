@@ -10,5 +10,4 @@ class AppColors {
 
   static const mediaOverviewMediaSelectedOverlay = Color(0xff880000);
   static const classicAccent = Color(0xff31F196);
-
 }

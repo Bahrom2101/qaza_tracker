@@ -172,13 +172,13 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                if(state.statusLogin.isInProgress)
-                Container(
-                  color: Colors.black38,
-                  child: const Center(
-                    child: CircularProgressIndicator(color: Colors.white),
+                if (state.statusLogin.isInProgress)
+                  Container(
+                    color: Colors.black38,
+                    child: const Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    ),
                   ),
-                ),
               ],
             ),
           );

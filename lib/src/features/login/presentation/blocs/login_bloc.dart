@@ -33,7 +33,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copWith(statusLogin: event.status, message: event.message));
   }
 
-  _onGoogleSignIn(GoogleSignInEvent event, Emitter<LoginState> emit) async {
+  Future<void> _onGoogleSignIn(
+      GoogleSignInEvent event, Emitter<LoginState> emit) async {
     add(const ChangeStatusEvent(FormzSubmissionStatus.inProgress));
     try {
       final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
@@ -66,7 +67,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
-  _onAppleSignIn(AppleSignInEvent event, Emitter<LoginState> emit) async {
+  Future<void> _onAppleSignIn(
+      AppleSignInEvent event, Emitter<LoginState> emit) async {
     add(const ChangeStatusEvent(FormzSubmissionStatus.inProgress));
     try {
       final rawNonce = generateNonce();
