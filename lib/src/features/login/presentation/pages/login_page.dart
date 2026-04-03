@@ -192,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             kWidth8,
                             Text(
-                              'contact',
+                              LocaleKeys.contact.tr(),
                               style: TextStyle(fontSize: 16),
                             ),
                           ],

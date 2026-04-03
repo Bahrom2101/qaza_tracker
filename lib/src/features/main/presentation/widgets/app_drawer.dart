@@ -137,7 +137,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   ),
                   kWidth8,
                   Text(
-                    'Contact',
+                    LocaleKeys.contact.tr(),
                     style: TextStyle(fontSize: 16),
                   ),
                 ],
