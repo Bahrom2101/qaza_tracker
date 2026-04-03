@@ -26,7 +26,6 @@ void main() async {
         supportedLocales: const [
           Locale(en),
           Locale(uz),
-          Locale(ru),
         ],
         path: 'assets/translations',
         fallbackLocale: Locale(LocalStorage.locale),

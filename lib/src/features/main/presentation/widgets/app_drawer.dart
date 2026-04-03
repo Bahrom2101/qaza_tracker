@@ -205,16 +205,6 @@ class _AppDrawerState extends State<AppDrawer> {
         ],
       ),
     ),
-    DropdownMenuItem(
-      value: ru,
-      child: Row(
-        children: [
-          SvgPicture.asset(AppIcons.ru),
-          kWidth8,
-          const Text('Русский'),
-        ],
-      ),
-    ),
   ];
 
   List<DropdownMenuItem<String>> get itemsThemeMode => [

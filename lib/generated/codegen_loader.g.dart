@@ -14,37 +14,6 @@ class CodegenLoader extends AssetLoader {
     return Future.value(mapLocales[locale.toString()]);
   }
 
-  static const Map<String, dynamic> _ru = {
-    "sign_in_google": "Войти через Google",
-    "sign_in_apple": "Войти с Apple ID",
-    "continue_without_sign_in": "Продолжить без входа",
-    "error_occurred": "Возникла ошибка",
-    "fajr": "Фаджр",
-    "zuhr": "Зухр",
-    "asr": "Аср",
-    "maghrib": "Магриб",
-    "isha": "Иша",
-    "witr": "Витр",
-    "add_period": "Каза намазы в этот период будет добавлен",
-    "exit": "Выход",
-    "save": "Сохранять",
-    "day": "день",
-    "month": "месяц",
-    "year": "год",
-    "start_date": "Дата начала",
-    "end_date": "Дата окончания",
-    "not_signed_in": "Не авторизован",
-    "light": "Светлый",
-    "dark": "Темный",
-    "system": "Системный",
-    "support": "Поддерживать",
-    "up_comings": "Предстоящие",
-    "feature_process": "Функция находится в процессе разработки",
-    "last_time": "Последний раз",
-    "added": "Добавлен",
-    "subtracted": "Вычтено",
-    "contact": "Связаться с нами"
-  };
   static const Map<String, dynamic> _en = {
     "sign_in_google": "Sign in with Google",
     "sign_in_apple": "Sign in with Apple ID",
@@ -108,7 +77,6 @@ class CodegenLoader extends AssetLoader {
     "contact": "Biz bilan bog'lanish"
   };
   static const Map<String, Map<String, dynamic>> mapLocales = {
-    "ru": _ru,
     "en": _en,
     "uz": _uz
   };

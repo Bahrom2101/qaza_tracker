@@ -45,16 +45,6 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     ),
-    DropdownMenuItem(
-      value: ru,
-      child: Row(
-        children: [
-          SvgPicture.asset(AppIcons.ru),
-          kWidth8,
-          const Text('Русский'),
-        ],
-      ),
-    ),
   ];
 
   @override
