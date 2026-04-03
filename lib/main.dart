@@ -17,8 +17,11 @@ void main() async {
     await EasyLocalization.ensureInitialized();
     await LocalStorage.getInstance();
     await setupLocator();
-    await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform);
+    if (Firebase.apps.isEmpty) {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    }
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
 
     runApp(
@@ -26,7 +29,6 @@ void main() async {
         supportedLocales: const [
           Locale(en),
           Locale(uz),
-          Locale(ru),
         ],
         path: 'assets/translations',
         fallbackLocale: Locale(LocalStorage.locale),

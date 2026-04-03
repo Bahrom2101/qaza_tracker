@@ -20,11 +20,11 @@ class HistoryEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-    email,
-    salah,
-    amount,
-    time,
-  ];
+        email,
+        salah,
+        amount,
+        time,
+      ];
 }
 
 class HistoryConverter
@@ -37,9 +37,9 @@ class HistoryConverter
 
   @override
   Map<String, dynamic> toJson(HistoryEntity object) => <String, dynamic>{
-    'salah': object.salah,
-    'email': object.email,
-    'amount': object.amount,
-    'time': object.time,
-  };
+        'salah': object.salah,
+        'email': object.email,
+        'amount': object.amount,
+        'time': object.time,
+      };
 }

@@ -10,7 +10,7 @@ import 'package:qaza_tracker/src/core/local_source/local_storage.dart';
 import 'package:qaza_tracker/src/features/app/presentation/blocs/app_bloc.dart';
 
 class QazaApp extends StatefulWidget {
-  const QazaApp({Key? key}) : super(key: key);
+  const QazaApp({super.key});
 
   @override
   State<QazaApp> createState() => _QazaAppState();

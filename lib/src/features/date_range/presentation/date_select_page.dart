@@ -7,8 +7,8 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class DateSelectPage extends StatefulWidget {
   const DateSelectPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   DateSelectPageState createState() => DateSelectPageState();
@@ -82,7 +82,7 @@ class DateSelectPageState extends State<DateSelectPage> {
                     : Theme.of(context)
                         .appBarTheme
                         .foregroundColor
-                        ?.withOpacity(0.5),
+                        ?.withValues(alpha: 0.5),
               ),
             ),
           ),

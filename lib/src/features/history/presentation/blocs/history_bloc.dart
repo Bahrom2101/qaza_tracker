@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:formz/formz.dart';
 import 'package:qaza_tracker/src/config/constants/constants.dart';
 import 'package:qaza_tracker/src/core/local_source/local_storage.dart';
-import 'package:qaza_tracker/src/features/history/domain/models/history_entity.dart';
+import 'package:qaza_tracker/src/features/history/domain/entities/history_entity.dart';
 
 part 'history_event.dart';
 
@@ -19,7 +19,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
     on<ChangeStatusEvent>(_onChangeStatus);
   }
 
-  _init(InitialEvent event, Emitter<HistoryState> emit) async {
+  Future<void> _init(InitialEvent event, Emitter<HistoryState> emit) async {
     add(const ChangeStatusEvent(FormzSubmissionStatus.inProgress));
     await getHistories(emit, event.salah);
   }

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 class AppTextInput extends StatelessWidget {
   const AppTextInput({
-    Key? key,
+    super.key,
     this.focus,
     this.controller,
     this.focused = false,
@@ -14,7 +14,7 @@ class AppTextInput extends StatelessWidget {
     this.maxLength,
     this.onChanged,
     this.readOnly = false,
-  }) : super(key: key);
+  });
 
   final FocusNode? focus;
   final TextEditingController? controller;

@@ -13,7 +13,7 @@ class AppConsts {
   static Size get size => _size ?? const Size(0, 0);
   static Size? _size;
 
-  static setSize(BuildContext context) async {
+  static Future<void> setSize(BuildContext context) async {
     _size ??= MediaQuery.of(context).size;
   }
 }
@@ -21,7 +21,6 @@ class AppConsts {
 const appName = 'Qaza tracker - Qazo hisoblash';
 const uz = 'uz';
 const en = 'en';
-const ru = 'ru';
 const dark = 'dark';
 const light = 'light';
 const system = 'system';
@@ -52,3 +51,7 @@ const kWidth4 = SizedBox(width: 4);
 const kWidth8 = SizedBox(width: 8);
 const kWidth16 = SizedBox(width: 16);
 const kWidth24 = SizedBox(width: 24);
+
+const kBorderRadius16 = BorderRadius.all(Radius.circular(16));
+
+const kPadding8 = EdgeInsets.all(8);

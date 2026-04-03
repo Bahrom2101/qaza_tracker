@@ -10,9 +10,11 @@ import 'package:qaza_tracker/src/config/routes/app_routes.dart';
 import 'package:qaza_tracker/src/config/themes/app_icons.dart';
 import 'package:qaza_tracker/src/core/local_source/local_storage.dart';
 import 'package:qaza_tracker/src/features/login/presentation/blocs/login_bloc.dart';
+import 'package:qaza_tracker/src/shared/presentation/buttons/widget_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -40,16 +42,6 @@ class _LoginPageState extends State<LoginPage> {
           SvgPicture.asset(AppIcons.uz),
           kWidth8,
           const Text("O'zbek"),
-        ],
-      ),
-    ),
-    DropdownMenuItem(
-      value: ru,
-      child: Row(
-        children: [
-          SvgPicture.asset(AppIcons.ru),
-          kWidth8,
-          const Text('Русский'),
         ],
       ),
     ),
@@ -112,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                           bloc.add(const GoogleSignInEvent());
                         },
                         style: ButtonStyle(
-                            minimumSize: MaterialStateProperty.all(
+                            minimumSize: WidgetStateProperty.all(
                                 const Size.fromHeight(50))),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -137,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                             bloc.add(const AppleSignInEvent());
                           },
                           style: ButtonStyle(
-                              minimumSize: MaterialStateProperty.all(
+                              minimumSize: WidgetStateProperty.all(
                                   const Size.fromHeight(50))),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -162,23 +154,50 @@ class _LoginPageState extends State<LoginPage> {
                           );
                         },
                         style: ButtonStyle(
-                            minimumSize: MaterialStateProperty.all(
+                            minimumSize: WidgetStateProperty.all(
                                 const Size.fromHeight(50))),
                         child: Text(
                           LocaleKeys.continue_without_sign_in.tr(),
                           style: const TextStyle(fontSize: 16),
                         ),
                       ),
+                      kHeight32,
+                      WidgetButton(
+                        onTap: () async {
+                          final Uri url =
+                              Uri.parse('http://t.me/qaza_tracker_bot');
+                          if (!await launchUrl(url)) {
+                            throw Exception('Could not launch $url');
+                          }
+                        },
+                        buttonColor: Colors.transparent,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              AppIcons.telegram,
+                              width: 16,
+                              height: 16,
+                            ),
+                            kWidth8,
+                            Text(
+                              LocaleKeys.contact.tr(),
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                if(state.statusLogin.isInProgress)
-                Container(
-                  color: Colors.black38,
-                  child: const Center(
-                    child: CircularProgressIndicator(color: Colors.white),
+                if (state.statusLogin.isInProgress)
+                  Container(
+                    color: Colors.black38,
+                    child: const Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    ),
                   ),
-                ),
               ],
             ),
           );

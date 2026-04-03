@@ -13,11 +13,12 @@ import 'package:qaza_tracker/src/core/local_source/local_storage.dart';
 import 'package:qaza_tracker/src/features/app/presentation/blocs/app_bloc.dart';
 import 'package:qaza_tracker/src/features/main/presentation/blocs/main_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../shared/presentation/buttons/widget_button.dart';
 
 class AppDrawer extends StatefulWidget {
-  const AppDrawer({
-    Key? key,
-  }) : super(key: key);
+  const AppDrawer({super.key});
 
   @override
   State<AppDrawer> createState() => _AppDrawerState();
@@ -115,7 +116,34 @@ class _AppDrawerState extends State<AppDrawer> {
                 style: const TextStyle(color: Colors.red),
               ),
             ),
-          )
+          ),
+          ListTile(
+            title: WidgetButton(
+              onTap: () async {
+                final Uri url = Uri.parse('http://t.me/qaza_tracker_bot');
+                if (!await launchUrl(url)) {
+                  throw Exception('Could not launch $url');
+                }
+              },
+              buttonColor: Colors.transparent,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    AppIcons.telegram,
+                    width: 16,
+                    height: 16,
+                  ),
+                  kWidth8,
+                  Text(
+                    LocaleKeys.contact.tr(),
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -131,11 +159,11 @@ class _AppDrawerState extends State<AppDrawer> {
               backgroundColor: Theme.of(context)
                   .appBarTheme
                   .backgroundColor
-                  ?.withOpacity(0.5),
+                  ?.withValues(alpha: 0.5),
               foregroundColor: Theme.of(context)
                   .appBarTheme
                   .backgroundColor
-                  ?.withOpacity(0.5),
+                  ?.withValues(alpha: 0.5),
               backgroundImage: CachedNetworkImageProvider(
                 LocalStorage.image,
                 cacheManager: CacheManager(Config(
@@ -174,16 +202,6 @@ class _AppDrawerState extends State<AppDrawer> {
           SvgPicture.asset(AppIcons.uz),
           kWidth8,
           const Text("O'zbek"),
-        ],
-      ),
-    ),
-    DropdownMenuItem(
-      value: ru,
-      child: Row(
-        children: [
-          SvgPicture.asset(AppIcons.ru),
-          kWidth8,
-          const Text('Русский'),
         ],
       ),
     ),
