@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../config/constants/constants.dart';
+
 class WidgetButton extends StatelessWidget {
   const WidgetButton({
     super.key,
@@ -38,7 +40,6 @@ class WidgetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var kBorderRadius16 = BorderRadius.all(Radius.circular(16));
     return Material(
       borderRadius: borderRadius ?? kBorderRadius16,
       color: Colors.transparent,
@@ -60,7 +61,7 @@ class WidgetButton extends StatelessWidget {
                 borderRadius: borderRadius ?? kBorderRadius16,
                 border: border,
               ),
-          padding: padding ?? EdgeInsets.all(8),
+          padding: padding ?? kPadding8,
           child: child,
         ),
       ),

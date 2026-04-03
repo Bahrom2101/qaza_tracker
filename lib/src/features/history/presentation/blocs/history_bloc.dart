@@ -19,7 +19,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
     on<ChangeStatusEvent>(_onChangeStatus);
   }
 
-  _init(InitialEvent event, Emitter<HistoryState> emit) async {
+  Future<void> _init(InitialEvent event, Emitter<HistoryState> emit) async {
     add(const ChangeStatusEvent(FormzSubmissionStatus.inProgress));
     await getHistories(emit, event.salah);
   }
