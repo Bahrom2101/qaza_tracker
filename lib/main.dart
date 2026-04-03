@@ -17,10 +17,12 @@ void main() async {
     await EasyLocalization.ensureInitialized();
     await LocalStorage.getInstance();
     await setupLocator();
-    if (Firebase.apps.isEmpty) {
+    try {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
+    } on FirebaseException catch (e) {
+      if (e.code != 'duplicate-app') rethrow;
     }
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
 
