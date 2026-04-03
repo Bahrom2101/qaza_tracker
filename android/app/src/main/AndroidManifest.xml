@@ -4,7 +4,8 @@
     <application
         android:label="Qaza tracker - Qazo hisoblash"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon"
+        android:roundIcon="@mipmap/launcher_icon_round">
         <activity
             android:name=".MainActivity"
             android:exported="true"
