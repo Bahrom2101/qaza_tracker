@@ -1,7 +1,7 @@
 name: qaza_tracker
 description: Tracking and calculating missed prayers
 publish_to: 'none'
-version: 2.2.0+7
+version: 2.3.0+9
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -50,3 +50,4 @@ flutter:
     - assets/icons/png/
     - assets/icons/svg/
     - assets/translations/
+    - shorebird.yaml
