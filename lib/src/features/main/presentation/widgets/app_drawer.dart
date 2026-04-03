@@ -13,6 +13,9 @@ import 'package:qaza_tracker/src/core/local_source/local_storage.dart';
 import 'package:qaza_tracker/src/features/app/presentation/blocs/app_bloc.dart';
 import 'package:qaza_tracker/src/features/main/presentation/blocs/main_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../shared/presentation/buttons/widget_button.dart';
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({super.key});
@@ -113,7 +116,34 @@ class _AppDrawerState extends State<AppDrawer> {
                 style: const TextStyle(color: Colors.red),
               ),
             ),
-          )
+          ),
+          ListTile(
+            title: WidgetButton(
+              onTap: () async {
+                final Uri url = Uri.parse('http://t.me/qaza_tracker_bot');
+                if (!await launchUrl(url)) {
+                  throw Exception('Could not launch $url');
+                }
+              },
+              buttonColor: Colors.transparent,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    AppIcons.telegram,
+                    width: 16,
+                    height: 16,
+                  ),
+                  kWidth8,
+                  Text(
+                    'Contact',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

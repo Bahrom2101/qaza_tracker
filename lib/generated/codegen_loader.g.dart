@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: prefer_single_quotes
+// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters, constant_identifier_names
 
 import 'dart:ui';
 
@@ -10,11 +10,11 @@ class CodegenLoader extends AssetLoader {
   const CodegenLoader();
 
   @override
-  Future<Map<String, dynamic>> load(String fullPath, Locale locale) {
+  Future<Map<String, dynamic>?> load(String path, Locale locale) {
     return Future.value(mapLocales[locale.toString()]);
   }
 
-  static const Map<String, dynamic> ru = {
+  static const Map<String, dynamic> _ru = {
     "sign_in_google": "Войти через Google",
     "sign_in_apple": "Войти с Apple ID",
     "continue_without_sign_in": "Продолжить без входа",
@@ -42,9 +42,10 @@ class CodegenLoader extends AssetLoader {
     "feature_process": "Функция находится в процессе разработки",
     "last_time": "Последний раз",
     "added": "Добавлен",
-    "subtracted": "Вычтено"
+    "subtracted": "Вычтено",
+    "contact": "Связаться с нами"
   };
-  static const Map<String, dynamic> en = {
+  static const Map<String, dynamic> _en = {
     "sign_in_google": "Sign in with Google",
     "sign_in_apple": "Sign in with Apple ID",
     "continue_without_sign_in": "Continue without sign in",
@@ -72,9 +73,10 @@ class CodegenLoader extends AssetLoader {
     "feature_process": "Feature is under development process",
     "last_time": "Last time",
     "added": "Added",
-    "subtracted": "Subtracted"
+    "subtracted": "Subtracted",
+    "contact": "Contact us"
   };
-  static const Map<String, dynamic> uz = {
+  static const Map<String, dynamic> _uz = {
     "sign_in_google": "Google orqali kirish",
     "sign_in_apple": "Apple ID bilan kirish",
     "continue_without_sign_in": "Ro'yxatdan o'tmasdan kirish",
@@ -102,11 +104,12 @@ class CodegenLoader extends AssetLoader {
     "feature_process": "Ushbu xizmat dasturi tuzilish jarayonida",
     "last_time": "Oxirgi safar",
     "added": "Qo'shildi",
-    "subtracted": "Ayrildi"
+    "subtracted": "Ayrildi",
+    "contact": "Biz bilan bog'lanish"
   };
   static const Map<String, Map<String, dynamic>> mapLocales = {
-    "ru": ru,
-    "en": en,
-    "uz": uz
+    "ru": _ru,
+    "en": _en,
+    "uz": _uz
   };
 }
